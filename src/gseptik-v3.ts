@@ -5,7 +5,7 @@ interface SepticCardConfig extends LovelaceCardConfig {
   entity: string;
 }
 
-@customElement("septic-element")
+@customElement("septic-element-v3")
 export class SepticElement extends LitElement implements LovelaceCard {
   @state()
   private _config?: SepticCardConfig;
@@ -14,115 +14,123 @@ export class SepticElement extends LitElement implements LovelaceCard {
       padding: 16px;
     }
 
-    .tank {
+    .tank-ball {
+      width: clamp(120px, 20vw, 25vw);
+      aspect-ratio: 1;
+      border-radius: 50%;
       position: relative;
-      width: clamp(10rem, 15vw, 15rem);
-      height: 100%;
-      border: 2px solid #9e9e9e;
-      border-radius: 8px;
-      background: #dce1ea;
       overflow: hidden;
+      background: #e6e6e6;
+      border: 2px solid #9e9e9e;
       box-sizing: border-box;
     }
-    .fill {
+
+    .water {
       position: absolute;
       bottom: 0;
       width: 100%;
-      height: 0%;
-      background: linear-gradient(#c5d0e6 5%, #007fff 95%);
+      height: calc(var(--level) * 1%);
+      background: linear-gradient(to top, #0066cc, #1e90ff);
       transition: height 0.6s ease;
-      overflow: hidden;
+      box-sizing: border-box;
     }
 
-    @keyframes bubble {
-      0% {
-        bottom: -30%;
-        opacity: 0;
-        transform: translateX(0);
-      }
-      10% {
-        opacity: 0.3;
-      }
-      100% {
-        bottom: 100%;
-        opacity: 0;
-        transform: translateX(15px);
-      }
-    }
-
-    @keyframes sideWays {
-      0% {
-        margin-left: 0px;
-      }
-      100% {
-        margin-left: 20px;
-      }
-    }
-    .bubble {
-      width: 20px;
-      height: 20px;
-      border-radius: 100%;
+    .water-line {
       position: absolute;
-      background-color: white;
-      bottom: -30%;
-      opacity: 0.2;
-      animation: bubble 10s ease-in-out infinite,
-        sideWays 4s ease-in-out infinite alternate;
-    }
-
-    .bubble--1 {
-      left: 10%;
-      animation-delay: 0.5s;
-      animation-duration: 16s;
-      opacity: 0.2;
-    }
-
-    .bubble--2 {
-      width: 15px;
-      height: 15px;
-      left: 40%;
-      animation-delay: 1s;
-      animation-duration: 10s;
-      opacity: 0.1;
-    }
-
-    .bubble--3 {
-      width: 10px;
-      height: 10px;
-      left: 30%;
-      animation-delay: 5s;
-      animation-duration: 20s;
-      opacity: 0.3;
-    }
-
-    .bubble--4 {
-      width: 25px;
-      height: 25px;
-      left: 40%;
-      animation-delay: 8s;
-      animation-duration: 17s;
-      opacity: 0.2;
-    }
-
-    .tank.critical {
-      background: #e32636;
-    }
-
-    .critical-line {
-      position: absolute;
+      top: 0;
       width: 100%;
-      border-top: 2px dashed #ff5252;
-      left: 0;
+      height: 2px;
+      background: rgba(255, 255, 255, 0.6);
+      box-sizing: border-box;
     }
 
-    .value-label {
+    .center-label {
       position: absolute;
-      width: 100%;
-      text-align: center;
+      inset: 0;
+      display: grid;
+      place-items: center;
+      font-size: 1.6rem;
       font-weight: bold;
-      color: #000;
-      bottom: 8px;
+      color: #003366;
       pointer-events: none;
+    }
+
+    .scale {
+      z-index: 10;
+      box-sizing: border-box;
+      position: absolute;
+      inset: 0 42%;
+      pointer-events: none;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .mark-critical {
+      position: absolute;
+      left: -25%;
+      bottom: calc(var(--critical) * 1% - 0.7rem);
+      width: 100%;
+      display: flex;
+      align-items: center;
+      font-size: 0.7rem;
+      color: #e32636;
+      box-sizing: border-box;
+      white-space: nowrap;
+    }
+    .mark {
+      position: absolute;
+      left: 0;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      font-size: 0.7rem;
+      color: #87b4d9;
+      box-sizing: border-box;
+      white-space: nowrap;
+    }
+
+    .mark::before {
+      content: "";
+      width: 8px;
+      height: 1px;
+      background: #666;
+    }
+
+    .mark[data-value="90"] {
+      top: calc(10% - 0.7rem / 2);
+    }
+    .mark[data-value="80"] {
+      top: calc(20% - 0.7rem / 2);
+    }
+    .mark[data-value="70"] {
+      top: calc(30% - 0.7rem / 2);
+    }
+    .mark[data-value="60"] {
+      top: calc(40% - 0.7rem / 2);
+    }
+    .mark[data-value="50"] {
+      top: calc(50% - 0.7rem / 2);
+    }
+    .mark[data-value="40"] {
+      top: calc(60% - 0.7rem / 2);
+    }
+    .mark[data-value="30"] {
+      top: calc(70% - 0.7rem / 2);
+    }
+    .mark[data-value="20"] {
+      top: calc(80% - 0.7rem / 2);
+    }
+    .mark[data-value="10"] {
+      top: calc(90% - 0.7rem / 2);
+    }
+    .mark.active {
+      color: #94cfff;
+      font-weight: 600;
+    }
+
+    .mark.critical-mark::before {
+      background: #e32636;
     }
 
     .flex {
@@ -173,25 +181,28 @@ export class SepticElement extends LitElement implements LovelaceCard {
   private renderTank() {
     const level = this.septicLevel;
     const critical = this.criticalLevel;
-    const isCritical = level >= critical;
-    const showBubbles = level > 10;
+    const marks = [10, 20, 30, 40, 50, 60, 70, 80, 90];
 
     return html`
-      <div class="tank ${isCritical ? "critical" : ""}">
-        <div class="fill" style="height: ${level}%">
-          ${showBubbles
-            ? html`
-                <div class="bubble bubble--1"></div>
-                <div class="bubble bubble--2"></div>
-                <div class="bubble bubble--3"></div>
-                <div class="bubble bubble--4"></div>
-              `
-            : null}
+      <div class="tank-ball" style="--level: ${level}; --critical: ${critical}">
+        <div class="scale">
+          ${marks.map(
+            (mark) => html`
+              <div
+                class="mark ${level >= mark ? "active" : ""} ${mark === critical
+                  ? "critical-mark"
+                  : ""}"
+                data-value="${mark}"
+              >
+                &mdash;${mark}%&mdash;
+              </div>
+            `
+          )}
+          ${html` <div class="mark-critical">&mdash;${critical}%&mdash;</div> `}
         </div>
-
-        <div class="critical-line" style="bottom: ${critical}%"></div>
-
-        <div class="value-label">Уровень септика: ${level}%</div>
+        <div class="water">
+          <div class="water-line"></div>
+        </div>
       </div>
     `;
   }
@@ -229,8 +240,6 @@ export class SepticElement extends LitElement implements LovelaceCard {
     const kriticheskii_uroven_septika = "sensor.kriticheskii_uroven_septika";
     const prevyshen_kriticheskii_uroven_septika =
       "sensor.prevyshen_kriticheskii_uroven_septika";
-    const stateObj = this.hass?.states?.[uroven_zhidkosti_septika];
-    const value = stateObj ? stateObj.state : "unknown";
     return html`
       <ha-card>
         <h2>Септик</h2>
@@ -252,6 +261,11 @@ export class SepticElement extends LitElement implements LovelaceCard {
               this._openMoreInfo(kriticheskii_uroven_septika)}>
               Критический уровень септика:
               ${this.hass?.states?.[kriticheskii_uroven_septika].state} %
+            </ha-card>
+            <ha-card class="statistic-card" @click=${() =>
+              this._openMoreInfo(uroven_zhidkosti_septika)}>
+              Уровень жидкости септика:
+              ${this.hass?.states?.[uroven_zhidkosti_septika].state} %
             </ha-card>
             <ha-card class="statistic-card" @click=${() =>
               this._openMoreInfo(temperatura_septika)}>
@@ -283,7 +297,7 @@ export class SepticElement extends LitElement implements LovelaceCard {
 
 (window as any).customCards = (window as any).customCards || [];
 (window as any).customCards.push({
-  type: "septic-element",
+  type: "septic-element-v3",
   name: "My Element",
   description: "Minimal Lit 3 card for Home Assistant",
 });
