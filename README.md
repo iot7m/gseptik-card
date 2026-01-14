@@ -1,6 +1,6 @@
 # GSeptik
 
-GSeptik is a set of custom Lovelace cards for **Home Assistant** designed to visualize septic tank data in a clear and intuitive way. The project focuses on visual level representation, not on historical charts or complex controls. The goal is to offer simple, readable, and domain-specific UI elements** instead of generic gauges or charts.
+GSeptik is a set of custom Lovelace cards for **Home Assistant** designed to visualize septic tank data in a clear and intuitive way. The project focuses on visual level representation, not on historical charts or complex controls. The goal is to offer simple, readable, and domain-specific UI elements instead of generic gauges or charts.
 
 GSeptik provides visual components to display:
 
