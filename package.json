@@ -3,7 +3,11 @@
   "version": "0.1.0",
   "type": "module",
   "scripts": {
-    "build": "rollup -c"
+    "build": "rollup -c --bundleConfigAsCjs",
+    "start": "rollup -c --watch --bundleConfigAsCjs",
+    "start:hass": "docker run --rm -p8123:8123 -v ./.hass:/config homeassistant/home-assistant:beta",
+    "start:hass-dev": "docker run --rm -p8123:8123 -v ./.hass:/config homeassistant/home-assistant:dev",
+    "start:hass-stable": "docker run --rm -p8123:8123 -v ./.hass:/config homeassistant/home-assistant:stable"
   },
   "devDependencies": {
     "@rollup/plugin-node-resolve": "^15.3.1",
