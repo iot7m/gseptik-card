@@ -15,9 +15,11 @@
     "start:hass-stable": "docker run --rm -p8123:8123 -v ./.hass:/config homeassistant/home-assistant:stable"
   },
   "lint-staged": {
-    "*.{js,ts,jsx,tsx}": [
-      "eslint --fix",
-      "prettier --fix"
+    "*.{js,ts,mjs}": [
+      "eslint --fix"
+    ],
+    "*.{js,ts,mjs,md,json,yaml,yml}": [
+      "prettier --write"
     ]
   },
   "devDependencies": {
