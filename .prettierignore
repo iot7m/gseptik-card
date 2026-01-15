@@ -9,8 +9,10 @@
 *.sln
 *.sw?
 
+# Ignore home assistant
+.hass
+
 # Ignore artifacts
-coverage
 dist
 
 # Ignore node modules
@@ -19,7 +21,3 @@ node_modules
 # Ignore files
 README.md
 
-# Ignore shadcn
-src/ui
-
-# Ignore files

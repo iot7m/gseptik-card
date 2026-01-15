@@ -1,6 +1,6 @@
 # GSeptik
 
-GSeptik is a set of custom Lovelace cards for **Home Assistant** designed to visualize septic tank data in a clear and intuitive way. The project focuses on visual level representation, not on historical charts or complex controls. The goal is to offer simple, readable, and domain-specific UI elements instead of generic gauges or charts.
+GSeptik is a set of custom Lovelace cards for **Home Assistant** designed to visualize septic tank data in a clear and intuitive way. The project focuses on visual level representation rather than historical charts or complex controls. The goal is to provide simple, readable, and domain-specific UI elements instead of generic gauges or charts.
 
 GSeptik provides visual components to display:
 
@@ -17,30 +17,26 @@ HACS support is planned but not yet available.
 
 ### Manual installation
 
-1. Download the latest `gseptik.js` file from the releases page.
-2. Copy the file into your Home Assistant `www` directory:
+First, download the latest `gseptik.js` file from the releases page and copy it to your Home Assistant `www` directory: `/config/www/gseptik/gseptik.js`. Then add the resource to Home Assistant using one of the following methods.
 
-   ```
-   /config/www/gseptik/gseptik.js
-   ```
+#### Using the UI
 
-3. Add the resource to Home Assistant:
-
-#### Using UI
-- Go to **Settings → Dashboards → Resources**
-- Click **Add Resource**
-- URL:
-  ```
-  /local/gseptik/gseptik.js
-  ```
-- Resource type: **JavaScript Module**
+1. Go to Settings → Dashboards → Resources
+2. Click Add Resource
+3. Set the URL to: `/local/gseptik/gseptik.js`
+4. Select **JavaScript Module** as the resource type
 
 #### Using YAML
+
+Add the following to your Lovelace configuration:
+
 ```yaml
 resources:
   - url: /local/gseptik/gseptik.js
     type: module
 ```
+
+Restart the browser or clear cache if the card does not appear immediately.
 
 ## Usage
 
@@ -53,43 +49,22 @@ Each card is configured using YAML.
 
 ## Development
 
+### Run development server
+
+Install Node.js dependencies using the command `npm install`. Start the development server with the command `npm start`. The development server runs at http://localhost:4000.
+
 ### Home Assistant server
 
-```sh
-npm run start:hass
-```
+Start the Home Assistant server using the command `npm run start:hass`. Home Assistant will be available at http://localhost:8123. The Home Assistant configuration includes the following module URL:
 
-Home Assistant will be available at http://localhost:8123
-
-### Development server
-
-```sh
-npm install
-npm start
-```
-
-Dev server runs on http://localhost:4000. To use it in Home Assistant, add resource to configuration.yaml:
 
 ```
 frontend:
   themes: !include_dir_merge_named themes
   extra_module_url:
-    - http://host.docker.internal:4000/gseptik.js
+    - http://localhost:4000/gseptik.js
 ```
 
+## Build module
 
-## Build
-
-```sh
-npm run build
-```
-
-Output:
-
-```
-dist/gseptik.js
-```
-
-## License
-
-MIT
+Run the build process using the command `npm install`. The compiled JavaScript module will be located in the `dist` directory.
