@@ -2,11 +2,28 @@ views:
   - path: default_view
     title: Home
     cards:
-      - type: custom:donut
+      - type: entities
+        title: GSeptik
+        state_color: false
+        show_header_toggle: false
+        entities:
+          - entity: sensor.uroven_zhidkosti_septika
+            icon: mdi:water-percent
+          - entity: sensor.temperatura_septika
+            icon: mdi:thermometer
+          - entity: sensor.davlenie_septika
+            icon: mdi:gauge
+          - entity: sensor.kriticheskii_uroven_septika
+            icon: mdi:water-alert
+          - entity: sensor.prevyshen_kriticheskii_uroven_septika
+            icon: mdi:alert-octagon-outline
+          - entity: sensor.oshibka_septika
+            icon: mdi:alert-circle-outline
+      - type: custom:cistern-card
         entity: sensor.example_level
-      - type: custom:tunk
+      - type: custom:donut-card
         entity: sensor.example_level
-      - type: custom:cistern
+      - type: custom:tank-card
         entity: sensor.example_level
-      - type: custom:tile
+      - type: custom:tile-card
         entity: sensor.example_level

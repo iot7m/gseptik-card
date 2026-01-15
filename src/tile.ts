@@ -5,7 +5,7 @@ interface SepticCardConfig extends LovelaceCardConfig {
   entity: string;
 }
 
-@customElement("tile")
+@customElement("tile-card")
 export class SepticElement extends LitElement implements LovelaceCard {
   @state()
   private _config?: SepticCardConfig;
@@ -104,7 +104,7 @@ export class SepticElement extends LitElement implements LovelaceCard {
 
 (window as any).customCards = (window as any).customCards || [];
 (window as any).customCards.push({
-  type: "tile",
+  type: "tile-card",
   name: "My Element",
   description: "Minimal Lit 3 card for Home Assistant",
 });
