@@ -74,9 +74,8 @@ Dev server runs on http://localhost:4000. To use it in Home Assistant, add resou
 frontend:
   themes: !include_dir_merge_named themes
   extra_module_url:
-    - http://host.docker.internal:4000/gseptik.js
+    - http://localhost:4000/gseptik.js
 ```
-
 
 ## Build
 
@@ -84,12 +83,3 @@ frontend:
 npm run build
 ```
 
-Output:
-
-```
-dist/gseptik.js
-```
-
-## License
-
-MIT
