@@ -3,24 +3,34 @@
   "version": "0.1.0",
   "type": "module",
   "scripts": {
-    "lint": "npx eslint .",
-    "lint:fix": "npm run lint -- --fix",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
     "prepare": "husky",
-    "prettier": "npx prettier . --check",
-    "prettier:fix": "npm run prettier -- --write",
+    "prettier": "prettier . --check",
+    "prettier:fix": "prettier . --write",
     "build": "rollup -c --bundleConfigAsCjs",
     "start": "rollup -c --watch --bundleConfigAsCjs",
     "start:hass": "docker run --rm -p8123:8123 -v ./.hass:/config homeassistant/home-assistant:beta",
     "start:hass-dev": "docker run --rm -p8123:8123 -v ./.hass:/config homeassistant/home-assistant:dev",
     "start:hass-stable": "docker run --rm -p8123:8123 -v ./.hass:/config homeassistant/home-assistant:stable"
   },
-  "devDependencies": {
+  "lint-staged": {
+    "*.{js,ts,jsx,tsx}": [
+      "eslint --fix",
+      "prettier --fix"
+    ]
+  },  "devDependencies": {
     "@rollup/plugin-node-resolve": "^15.3.1",
     "@rollup/plugin-replace": "^5.0.7",
     "@rollup/plugin-terser": "^0.4.4",
     "@rollup/plugin-typescript": "^12.3.0",
     "@trivago/prettier-plugin-sort-imports": "^6.0.2",
     "custom-card-helpers": "^1.9.0",
+    "eslint": "^9.39.2",
+    "globals": "^17.0.0",
+    "husky": "^9.1.7",
+    "lint-staged": "^16.2.7",
+    "prettier": "^3.8.0",
     "rollup": "^4.54.0",
     "typescript": "^5.9.3"
   },
