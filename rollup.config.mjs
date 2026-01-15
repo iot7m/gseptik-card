@@ -12,6 +12,7 @@ const serveOptions = {
   host: "0.0.0.0",
   port: 4000,
   allowCrossOrigin: true,
+  verbose: true,
   headers: {
     "Access-Control-Allow-Origin": "*",
   },

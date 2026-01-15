@@ -1,0 +1,34 @@
+- resource: https://data.gseptik.ru/Api/public/v2/home-assistant/readings/sj7enwvE4PbzNJJKWTkxJx3z
+  method: GET
+  scan_interval: 300
+  timeout: 30
+  sensor:
+    # Датчик 1
+    - name: Уровень жидкости септика
+      unique_id: sensor_gseptik_liquid_level
+      json_attributes_path: "$[0]"
+      value_template: "{{ value_json[0].liquid_level }}"
+      unit_of_measurement: "%"
+    - name: Температура септика
+      unique_id: sensor_gseptik_temperature
+      json_attributes_path: "$[0]"
+      value_template: "{{ value_json[0].temp }}"
+      unit_of_measurement: "°C"
+    - name: Давление септика
+      unique_id: sensor_gseptik_pressure
+      json_attributes_path: "$[0]"
+      value_template: "{{ value_json[0].pressure }}"
+      unit_of_measurement: "мбар"
+    - name: Критический уровень септика
+      unique_id: sensor_gseptik_x_level
+      json_attributes_path: "$[0]"
+      value_template: "{{ value_json[0].x_level }}"
+      unit_of_measurement: "%"
+    - name: Превышен критический уровень септика
+      unique_id: sensor_gseptik_exceeds_x_level
+      json_attributes_path: "$[0]"
+      value_template: "{{ value_json[0].exceeds_x_level }}"
+    - name: Ошибка септика
+      unique_id: sensor_gseptik_error_name
+      json_attributes_path: "$[0]"
+      value_template: "{{ value_json[0].error_name }}"

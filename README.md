@@ -57,7 +57,7 @@ Run the build process using the command `npm install`. The compiled JavaScript m
 
 Install Node.js dependencies using the command `npm install`. Start the development server with the command `npm start`. The development server runs at http://localhost:4000.
 
-### Home Assistant server
+### Run Home Assistant server
 
 Start the Home Assistant server using the command `npm run start:hass`. Home Assistant will be available at http://localhost:8123. The Home Assistant configuration includes the following module URL:
 
@@ -68,3 +68,24 @@ frontend:
   extra_module_url:
     - http://localhost:4000/gseptik.js
 ```
+
+### Configure Home Assistant server
+
+Add a new card and choose Manual card.
+Select any panel, take control if ncessary, go to Text Edit mode and put code:
+```yaml
+views:
+  - path: default_view
+    title: Home
+    cards:
+      - type: custom:septic-element-v1
+        entity: sensor.example_level
+      - type: custom:septic-element-v2
+        entity: sensor.example_level
+      - type: custom:septic-element-v3
+        entity: sensor.example_level
+      - type: custom:septic-element-v4
+        entity: sensor.example_level
+
+```
+Save the panel. If the development server is running on port 4000, the card should render immediately using the live development build.
