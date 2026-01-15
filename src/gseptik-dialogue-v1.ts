@@ -305,7 +305,7 @@ export class SepticDialog extends LitElement {
                 <ha-icon icon="mdi:gauge"></ha-icon>
                 ${this.hass?.states?.[davlenie_septika].state}
                 mbar
-            </ha-card>             
+            </ha-card>
           </div>
         </div>
       </div>
