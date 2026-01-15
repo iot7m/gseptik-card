@@ -1,6 +1,6 @@
 # GSeptik
 
-GSeptik is a set of custom Lovelace cards for **Home Assistant** designed to visualize septic tank data in a clear and intuitive way. The project focuses on visual level representation, not on historical charts or complex controls. The goal is to offer simple, readable, and domain-specific UI elements instead of generic gauges or charts.
+GSeptik is a set of custom Lovelace cards for **Home Assistant** designed to visualize septic tank data in a clear and intuitive way. The project focuses on visual level representation rather than historical charts or complex controls. The goal is to provide simple, readable, and domain-specific UI elements instead of generic gauges or charts.
 
 GSeptik provides visual components to display:
 
@@ -51,11 +51,11 @@ Each card is configured using YAML.
 
 ### Run development server
 
-Install node libraries by command `npm install`. Run development server by command: `npm start`. Development  server runs on http://localhost:4000.
+Install Node.js dependencies using the command `npm install`. Start the development server with the command `npm start`. The development server runs at http://localhost:4000.
 
 ### Home Assistant server
 
-Run home assistant server by command: `npm run start:hass`. Home Assistant will be available at http://localhost:8123. Home assistant configuration has url of module:
+Start the Home Assistant server using the command `npm run start:hass`. Home Assistant will be available at http://localhost:8123. The Home Assistant configuration includes the following module URL:
 
 
 ```
@@ -65,9 +65,6 @@ frontend:
     - http://localhost:4000/gseptik.js
 ```
 
-
 ## Build module
 
-Run command to build jscript module: `npm install`. The module will be located at `distr` directroy.
-
-
+Run the build process using the command `npm install`. The compiled JavaScript module will be located in the `dist` directory.
