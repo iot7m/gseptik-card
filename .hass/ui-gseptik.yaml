@@ -1,0 +1,12 @@
+views:
+  - path: default_view
+    title: Home
+    cards:
+      - type: custom:septic-element-v1
+        entity: sensor.example_level
+      - type: custom:septic-element-v2
+        entity: sensor.example_level
+      - type: custom:septic-element-v3
+        entity: sensor.example_level
+      - type: custom:septic-element-v4
+        entity: sensor.example_level

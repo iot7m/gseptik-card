@@ -96,8 +96,6 @@ views:
         entity: sensor.example_level
       - type: custom:septic-element-v4
         entity: sensor.example_level
-
-
 ```
 
 Save the dashboard. If the development server is running on port 4000, the cards should render immediately using the live development build.
