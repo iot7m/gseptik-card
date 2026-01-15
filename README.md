@@ -69,10 +69,20 @@ frontend:
     - http://localhost:4000/gseptik.js
 ```
 
+This demo setup also uses REST sensors defined in `rests.yaml`. In `configuration.yaml` it is included as:
+
+
+```
+# Include extra configuration
+rest: !include rests.yaml
+```
+
+The REST sensors use a public endpoint like `https://data.gseptik.ru/Api/public/v2/home-assistant/readings/<TOKEN>`. If you need your own token, you can get it from the GSeptik personal account at https://gseptik.ru/. The website also supports “login as guest” for a quick demo.
+
 ### Configure Home Assistant server
 
-Add a new card and choose Manual card.
-Select any panel, take control if ncessary, go to Text Edit mode and put code:
+You can add the cards in two ways: using the UI or by editing Lovelace YAML. In UI mode, add a new card and choose Manual.  For YAML mode, select any dashboard, take control if necessary, open the Raw configuration editor (YAML mode), and add the cards to your view, for example:
+
 ```yaml
 views:
   - path: default_view
@@ -87,5 +97,7 @@ views:
       - type: custom:septic-element-v4
         entity: sensor.example_level
 
+
 ```
-Save the panel. If the development server is running on port 4000, the card should render immediately using the live development build.
+
+Save the dashboard. If the development server is running on port 4000, the cards should render immediately using the live development build.
