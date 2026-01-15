@@ -49,11 +49,15 @@ Each card is configured using YAML.
 
 ## Development
 
+## Build module
+
+Run the build process using the command `npm install`. The compiled JavaScript module will be located in the `dist` directory.
+
 ### Run development server
 
 Install Node.js dependencies using the command `npm install`. Start the development server with the command `npm start`. The development server runs at http://localhost:4000.
 
-### Home Assistant server
+### Run Home Assistant server
 
 Start the Home Assistant server using the command `npm run start:hass`. Home Assistant will be available at http://localhost:8123. The Home Assistant configuration includes the following module URL:
 
@@ -65,6 +69,35 @@ frontend:
     - http://localhost:4000/gseptik.js
 ```
 
-## Build module
+This demo setup also uses REST sensors defined in `rests.yaml`. In `configuration.yaml` it is included as:
 
-Run the build process using the command `npm install`. The compiled JavaScript module will be located in the `dist` directory.
+
+```
+# Include extra configuration
+rest: !include rests.yaml
+```
+
+The REST sensors use a public endpoint like `https://data.gseptik.ru/Api/public/v2/home-assistant/readings/<TOKEN>`. If you need your own token, you can get it from the GSeptik personal account at https://gseptik.ru/. The website also supports “login as guest” for a quick demo.
+
+### Configure Home Assistant server
+
+You can add the cards in two ways: using the UI or by editing Lovelace YAML. In UI mode, add a new card and choose Manual.  For YAML mode, select any dashboard, take control if necessary, open the Raw configuration editor (YAML mode), and add the cards to your view, for example:
+
+```yaml
+views:
+  - path: default_view
+    title: Home
+    cards:
+      - type: custom:septic-element-v1
+        entity: sensor.example_level
+      - type: custom:septic-element-v2
+        entity: sensor.example_level
+      - type: custom:septic-element-v3
+        entity: sensor.example_level
+      - type: custom:septic-element-v4
+        entity: sensor.example_level
+
+
+```
+
+Save the dashboard. If the development server is running on port 4000, the cards should render immediately using the live development build.
