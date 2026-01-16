@@ -21,3 +21,26 @@ node_modules
 # Ignore files
 README.md
 
+# Configs
+*.yml
+*.yaml
+*.md
+*.lock
+*.json
+.npmrc
+.nvmrc
+.node-version
+.editorconfig
+.gitignore
+.dockerignore
+.husky
+.github
+.gitlab-ci.yml
+.prettierignore
+.prettierrc
+LICENSE
+
+# Build outputs
+dist/
+build/
+out/

@@ -1,12 +1,20 @@
-import { LitElement, html, css } from "lit";
+import { LitElement, html, css, PropertyValues } from "lit";
 import { customElement, state } from "lit/decorators.js";
-import type { LovelaceCard, LovelaceCardConfig } from "custom-card-helpers";
+import type { LovelaceCard, LovelaceCardConfig, HomeAssistant} from "custom-card-helpers";
 import ApexCharts from "apexcharts";
-("apexcharts");
 interface SepticCardConfig extends LovelaceCardConfig {
   entity: string;
 }
 
+declare global {
+  interface Window {
+    customCards?: Array<{
+      type: string;
+      name: string;
+      description: string;
+    }>;
+  }
+}
 @customElement("donut-card")
 export class SepticElement extends LitElement implements LovelaceCard {
   @state()
@@ -165,7 +173,7 @@ export class SepticElement extends LitElement implements LovelaceCard {
     this._chart.updateSeries([value, 100 - value]);
   }
 
-  updated(changedProps: Map<string, any>) {
+  updated(changedProps: PropertyValues) {
     if (changedProps.has("hass")) {
       this._updateChart();
     }
@@ -180,18 +188,16 @@ export class SepticElement extends LitElement implements LovelaceCard {
     return 1;
   }
 
-  hass?: any;
+  hass?: HomeAssistant;
 
   render() {
     if (!this._config) return html`<ha-card>Loading...</ha-card>`;
-    const uroven_zhidkosti_septika = "sensor.uroven_zhidkosti_septika";
+
     const temperatura_septika = "sensor.temperatura_septika";
     const davlenie_septika = "sensor.davlenie_septika";
     const kriticheskii_uroven_septika = "sensor.kriticheskii_uroven_septika";
     const prevyshen_kriticheskii_uroven_septika =
       "sensor.prevyshen_kriticheskii_uroven_septika";
-    const stateObj = this.hass?.states?.[uroven_zhidkosti_septika];
-    const value = stateObj ? stateObj.state : "unknown";
     return html`
       <ha-card>
         <h2>Септик</h2>
@@ -216,7 +222,7 @@ export class SepticElement extends LitElement implements LovelaceCard {
               this._openMoreInfo(temperatura_septika)}>
               <ha-icon icon="mdi:thermometer"></ha-icon>
               ${
-                this.hass?.states?.[temperatura_septika].state > 0
+                Number(this.hass?.states?.[temperatura_septika].state) > 0
                   ? html`<good-value
                       >+${this.hass?.states?.[temperatura_septika].state}
                       &deg;C</good-value
@@ -240,8 +246,8 @@ export class SepticElement extends LitElement implements LovelaceCard {
   }
 }
 
-(window as any).customCards = (window as any).customCards || [];
-(window as any).customCards.push({
+window.customCards = window.customCards || [];
+window.customCards.push({
   type: "donut-card",
   name: "My Element",
   description: "Minimal Lit 3 card for Home Assistant",

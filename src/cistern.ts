@@ -1,6 +1,17 @@
 import { LitElement, html, css } from "lit";
 import { customElement, state } from "lit/decorators.js";
-import type { LovelaceCard, LovelaceCardConfig } from "custom-card-helpers";
+import type { LovelaceCard, LovelaceCardConfig, HomeAssistant } from "custom-card-helpers";
+
+declare global {
+  interface Window {
+    customCards?: Array<{
+      type: string;
+      name: string;
+      description: string;
+    }>;
+  }
+}
+
 interface SepticCardConfig extends LovelaceCardConfig {
   entity: string;
 }
@@ -230,7 +241,7 @@ export class SepticElement extends LitElement implements LovelaceCard {
     return 1;
   }
 
-  hass?: any;
+  hass?: HomeAssistant;
 
   render() {
     if (!this._config) return html`<ha-card>Loading...</ha-card>`;
@@ -271,7 +282,7 @@ export class SepticElement extends LitElement implements LovelaceCard {
               this._openMoreInfo(temperatura_septika)}>
               <ha-icon icon="mdi:thermometer"></ha-icon>
               ${
-                this.hass?.states?.[temperatura_septika].state > 0
+                Number(this.hass?.states?.[temperatura_septika].state) > 0
                   ? html`<good-value
                       >+${this.hass?.states?.[temperatura_septika].state}
                       &deg;C</good-value
@@ -295,8 +306,8 @@ export class SepticElement extends LitElement implements LovelaceCard {
   }
 }
 
-(window as any).customCards = (window as any).customCards || [];
-(window as any).customCards.push({
+window.customCards = window.customCards || [];
+window.customCards.push({
   type: "cistern-card",
   name: "My Element",
   description: "Minimal Lit 3 card for Home Assistant",

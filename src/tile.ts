@@ -1,7 +1,23 @@
 import { LitElement, html, css } from "lit";
 import { customElement, state } from "lit/decorators.js";
-import type { LovelaceCard, LovelaceCardConfig } from "custom-card-helpers";
+import type { LovelaceCard, LovelaceCardConfig, HomeAssistant } from "custom-card-helpers";
+
+declare global {
+  interface Window {
+    customCards?: Array<{
+      type: string;
+      name: string;
+      description: string;
+    }>;
+  }
+}
+
 interface SepticCardConfig extends LovelaceCardConfig {
+  entity: string;
+}
+
+interface GspeptikDialogueElement extends HTMLElement {
+  hass?: HomeAssistant;
   entity: string;
 }
 
@@ -78,10 +94,10 @@ export class SepticElement extends LitElement implements LovelaceCard {
     return 1;
   }
 
-  hass?: any;
+  hass?: HomeAssistant;
 
   private _openDialog() {
-    const dialog = document.createElement("dialogue") as any;
+    const dialog = document.createElement("gspeptik-dialogue") as GspeptikDialogueElement;
     dialog.hass = this.hass;
     dialog.entity = this._config!.entity;
     document.body.appendChild(dialog);
@@ -102,8 +118,8 @@ export class SepticElement extends LitElement implements LovelaceCard {
   }
 }
 
-(window as any).customCards = (window as any).customCards || [];
-(window as any).customCards.push({
+window.customCards = window.customCards || [];
+window.customCards.push({
   type: "tile-card",
   name: "My Element",
   description: "Minimal Lit 3 card for Home Assistant",

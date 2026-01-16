@@ -1,9 +1,10 @@
+import type { HomeAssistant } from "custom-card-helpers";
 import { LitElement, html, css } from "lit";
 import { customElement, state, property } from "lit/decorators.js";
 
 @customElement("gspeptik-dialogue")
 export class SepticDialog extends LitElement {
-  @property({ attribute: false }) hass!: any;
+  @property({ attribute: false }) hass!: HomeAssistant;
   @property() entity!: string;
 
   @state() private _tab = 0;
@@ -289,7 +290,7 @@ export class SepticDialog extends LitElement {
               this._openMoreInfo(temperatura_septika)}>
               <ha-icon icon="mdi:thermometer"></ha-icon>
               ${
-                this.hass?.states?.[temperatura_septika].state > 0
+                Number(this.hass?.states?.[temperatura_septika].state) > 0
                   ? html`<good-value
                       >+${this.hass?.states?.[temperatura_septika].state}
                       &deg;C</good-value

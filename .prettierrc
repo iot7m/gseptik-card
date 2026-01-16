@@ -1,4 +1,5 @@
 {
+  "parser": "typescript",
   "plugins": ["@trivago/prettier-plugin-sort-imports"],
   "singleQuote": false,
   "jsxSingleQuote": false,
