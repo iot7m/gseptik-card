@@ -18,6 +18,9 @@ dist
 # Ignore node modules
 node_modules
 
+# Ignore coverage
+output
+
 # Ignore files
 README.md
 LICENSE

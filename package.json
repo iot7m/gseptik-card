@@ -41,6 +41,7 @@
     "@stylistic/eslint-plugin": "^5.7.0",
     "@trivago/prettier-plugin-sort-imports": "^6.0.2",
     "@vitest/coverage-v8": "^4.0.17",
+    "@vitest/ui": "^4.0.17",
     "custom-card-helpers": "^1.9.0",
     "eslint": "^9.39.2",
     "eslint-plugin-tsdoc": "^0.5.0",
