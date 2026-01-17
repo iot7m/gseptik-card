@@ -61,7 +61,6 @@ jobs:
         shell: bash
         run: npm run test
   coverage:
-    if: false
     needs: test
     runs-on: ubuntu-latest
     steps:
