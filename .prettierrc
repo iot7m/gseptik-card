@@ -30,12 +30,4 @@
   ],
   "importOrderSeparation": true,
   "importOrderSortSpecifiers": true,
-  "overrides": [
-    {
-      "files": ["*.ts"],
-      "options": {
-        "parser": "typescript"
-      }
-    }
-  ]
 }
