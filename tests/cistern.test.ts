@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 
-import "../src/cistern";
+import "@/cistern";
 
 type HassState = { state: string };
 type HassLike = { states: Record<string, HassState> };
