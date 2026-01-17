@@ -16,7 +16,7 @@ jobs:
       - name: Checkout sources
         uses: actions/checkout@v4
       - name: Set up NodeJS
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
           node-version: 22
       - name: Install npm packages
@@ -35,7 +35,7 @@ jobs:
       - name: Checkout sources
         uses: actions/checkout@v4
       - name: Set up NodeJS
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
           node-version: 22
       - name: Install npm packages
@@ -52,7 +52,7 @@ jobs:
       - name: Checkout sources
         uses: actions/checkout@v4
       - name: Set up NodeJS
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
           node-version: 22
       - name: Install npm packages
@@ -69,7 +69,7 @@ jobs:
       - name: Checkout sources
         uses: actions/checkout@v4
       - name: Set up NodeJS
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
           node-version: 22
       - name: Install npm packages
