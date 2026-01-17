@@ -14,8 +14,6 @@
 
 # Ignore artifacts
 dist
-build/
-out/
 
 # Ignore node modules
 node_modules
@@ -23,21 +21,3 @@ node_modules
 # Ignore files
 README.md
 LICENSE
-
-# Configs
-*.yml
-*.yaml
-*.md
-*.lock
-*.json
-.npmrc
-.nvmrc
-.node-version
-.editorconfig
-.gitignore
-.dockerignore
-.husky
-.github
-.gitlab-ci.yml
-.prettierignore
-.prettierrc
