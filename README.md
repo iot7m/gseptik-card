@@ -88,13 +88,11 @@ views:
   - path: default_view
     title: Home
     cards:
-      - type: custom:cistern-card
+      - type: custom:gseptik-cistern-card
         entity: sensor.example_level
-      - type: custom:donut-card
+      - type: custom:gseptik-tank-card
         entity: sensor.example_level
-      - type: custom:tank-card
-        entity: sensor.example_level
-      - type: custom:tile-card
+      - type: custom:gseptik-tile-card
         entity: sensor.example_level
 ```
 
