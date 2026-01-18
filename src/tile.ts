@@ -23,7 +23,7 @@ interface GspeptikDialogueElement extends HTMLElement {
   entity: string;
 }
 
-@customElement("tile-card")
+@customElement("gseptik-tile-card")
 export class SepticElement extends LitElement implements LovelaceCard {
   @state()
   private _config?: SepticCardConfig;

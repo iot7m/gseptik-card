@@ -22,14 +22,14 @@ views:
       - type: thermostat
         entity: climate.ecobee
         name: Climate
-      - type: custom:cistern-card
+      - type: custom:gseptik-cistern-card
         entity: sensor.example_level
-      - type: custom:tank-card
+      - type: custom:gseptik-tank-card
         entity: sensor.example_level
   - title: Tiles
     cards:
       - type: tile
         entity: climate.ecobee
         name: Климат
-      - type: custom:tile-card
+      - type: custom:gseptik-tile-card
         entity: sensor.example_level

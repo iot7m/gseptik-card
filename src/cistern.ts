@@ -18,7 +18,7 @@ interface SepticCardConfig extends LovelaceCardConfig {
   entity: string;
 }
 
-@customElement("cistern-card")
+@customElement("gseptik-cistern-card")
 export class CisternCard extends LitElement implements LovelaceCard {
   private _config?: SepticCardConfig;
 
