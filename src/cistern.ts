@@ -19,7 +19,7 @@ interface SepticCardConfig extends LovelaceCardConfig {
 }
 
 @customElement("cistern-card")
-export class SepticElement extends LitElement implements LovelaceCard {
+export class CisternCard extends LitElement implements LovelaceCard {
   private _config?: SepticCardConfig;
   static styles = css`
     ha-card {
