@@ -1,6 +1,6 @@
 import { LitElement, css, html } from "lit";
 
-import { customElement, state } from "lit/decorators.js";
+import { customElement } from "lit/decorators.js";
 
 import type { HomeAssistant, LovelaceCard, LovelaceCardConfig } from "custom-card-helpers";
 
@@ -20,8 +20,8 @@ interface SepticCardConfig extends LovelaceCardConfig {
 
 @customElement("tank-card")
 export class TankCard extends LitElement implements LovelaceCard {
-  @state()
   private _config?: SepticCardConfig;
+
   static styles = css`
     ha-card {
       padding: 16px;
@@ -223,6 +223,7 @@ export class TankCard extends LitElement implements LovelaceCard {
   setConfig(config: SepticCardConfig) {
     if (!config.entity) throw new Error("Entity must be defined");
     this._config = config;
+    this.requestUpdate();
   }
 
   getCardSize(): number {
