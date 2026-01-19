@@ -50,32 +50,6 @@ export class TankCard extends LitElement implements LovelaceCard {
     return Number.isNaN(value) ? 0 : Math.min(Math.max(value, 0), 100);
   }
 
-  private renderTank() {
-    const level = this.septicLevel;
-    const critical = this.criticalLevel;
-    const isCritical = level >= critical;
-    const showBubbles = level > 10;
-
-    return html`
-      <div class="tank ${isCritical ? "critical" : ""}">
-        <div class="fill" style="height: ${level}%">
-          ${showBubbles
-            ? html`
-                <div class="bubble bubble--1"></div>
-                <div class="bubble bubble--2"></div>
-                <div class="bubble bubble--3"></div>
-                <div class="bubble bubble--4"></div>
-              `
-            : null}
-        </div>
-
-        <div class="critical-line" style="bottom: ${critical}%"></div>
-
-        <div class="value-label">Уровень септика: ${level}%</div>
-      </div>
-    `;
-  }
-
   render() {
     if (!this._config) return html`<ha-card>Loading...</ha-card>`;
     const temperatura_septika = "sensor.temperatura_septika";
@@ -117,6 +91,32 @@ export class TankCard extends LitElement implements LovelaceCard {
           </div>
         </div>
       </ha-card>
+    `;
+  }
+
+  private renderTank() {
+    const level = this.septicLevel;
+    const critical = this.criticalLevel;
+    const isCritical = level >= critical;
+    const showBubbles = level > 10;
+
+    return html`
+      <div class="tank ${isCritical ? "critical" : ""}">
+        <div class="fill" style="height: ${level}%">
+          ${showBubbles
+            ? html`
+                <div class="bubble bubble--1"></div>
+                <div class="bubble bubble--2"></div>
+                <div class="bubble bubble--3"></div>
+                <div class="bubble bubble--4"></div>
+              `
+            : null}
+        </div>
+
+        <div class="critical-line" style="bottom: ${critical}%"></div>
+
+        <div class="value-label">Уровень септика: ${level}%</div>
+      </div>
     `;
   }
 
