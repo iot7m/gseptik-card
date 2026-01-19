@@ -2,6 +2,9 @@ views:
   - path: default_view
     title: Entities
     cards:
+      - type: thermostat
+        entity: climate.ecobee
+        name: Climate
       - type: entities
         title: Entities
         state_color: false
@@ -135,9 +138,6 @@ views:
               border-radius: var(--ha-card-border-radius, 12px);
               overflow: hidden;
             }
-      - type: thermostat
-        entity: climate.ecobee
-        name: Climate
       - type: custom:gseptik-cistern-card
         entity: sensor.example_level
       - type: custom:gseptik-tank-card
