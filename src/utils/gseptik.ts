@@ -14,7 +14,7 @@ import type { HomeAssistant } from "custom-card-helpers";
  * @param entityId - Entity identifier from card configuration
  * @returns Normalized Home Assistant `entity_id` with `sensor.` prefix
  */
-function toEntityId(entityId: string): string {
+export function toEntityId(entityId: string): string {
   if (entityId.includes("sensor.")) return entityId;
   return `sensor.${entityId}`;
 }

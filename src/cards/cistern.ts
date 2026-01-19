@@ -5,8 +5,9 @@ import { customElement } from "lit/decorators.js";
 import type { HomeAssistant, LovelaceCard } from "custom-card-helpers";
 
 import type { GSeptikCardConfig } from "@/types/cards";
+import { GSEPTIK_ENTITY_DEFS } from "@/types/defs";
 
-import { getCriticalLevel, getLevel } from "@/utils/gseptik";
+import { getCriticalLevel, getLevel, toEntityId } from "@/utils/gseptik";
 
 import { CARD_PREFIX } from "@/const";
 
@@ -14,39 +15,6 @@ export const CARD_NAME = `${CARD_PREFIX}-cistern-card` as const;
 
 @customElement(CARD_NAME)
 export class CisternCard extends LitElement implements LovelaceCard {
-  private readonly _entities = [
-    {
-      entity: "sensor.uroven_zhidkosti_septika",
-      icon: "mdi:water-percent",
-      name: "Уровень жидкости",
-    },
-    {
-      entity: "sensor.temperatura_septika",
-      icon: "mdi:thermometer",
-      name: "Температура",
-    },
-    {
-      entity: "sensor.davlenie_septika",
-      icon: "mdi:gauge",
-      name: "Давление",
-    },
-    {
-      entity: "sensor.kriticheskii_uroven_septika",
-      icon: "mdi:water-alert",
-      name: "Критический уровень",
-    },
-    {
-      entity: "sensor.prevyshen_kriticheskii_uroven_septika",
-      icon: "mdi:alert-octagon-outline",
-      name: "Превышение уровня",
-    },
-    {
-      entity: "sensor.oshibka_septika",
-      icon: "mdi:alert-circle-outline",
-      name: "Ошибка",
-    },
-  ];
-
   private _config?: GSeptikCardConfig;
 
   hass?: HomeAssistant;
@@ -102,8 +70,8 @@ export class CisternCard extends LitElement implements LovelaceCard {
   }
 
   private renderCistern() {
-    const level = getLevel(this.hass, this._config!.entities.level);
-    const criticalLevel = getCriticalLevel(this.hass, this._config!.entities.x_level);
+    const level = getLevel(this.hass, toEntityId(this._config!.entities.level));
+    const criticalLevel = getCriticalLevel(this.hass, toEntityId(this._config!.entities.x_level));
     const marks = [10, 20, 30, 40, 50, 60, 70, 80, 90];
 
     return html`
@@ -137,17 +105,22 @@ export class CisternCard extends LitElement implements LovelaceCard {
 
     return html`
       <div class="entities">
-        ${this._entities.map((item) => {
-          const stateObj = this.hass!.states[item.entity];
+        ${GSEPTIK_ENTITY_DEFS.map((def) => {
+          const entityId = toEntityId(this._config!.entities[def.key]);
+          const stateObj = this.hass!.states[entityId];
           if (!stateObj) return null;
 
+          const uom =
+            typeof stateObj.attributes?.unit_of_measurement === "string" ? stateObj.attributes.unit_of_measurement : "";
+
+          const name =
+            typeof stateObj.attributes?.friendly_name === "string" ? stateObj.attributes.friendly_name : def.label;
+
           return html`
-            <div class="entity-row" @click=${() => this._openMoreInfo(item.entity)}>
-              <ha-icon class="entity-icon" icon=${item.icon}></ha-icon>
-
-              <div class="entity-name">${item.name ?? stateObj.attributes.friendly_name}</div>
-
-              <div class="entity-state">${stateObj.state} ${stateObj.attributes.unit_of_measurement ?? ""}</div>
+            <div class="entity-row" @click=${() => this._openMoreInfo(entityId)}>
+              <ha-icon class="entity-icon" icon=${def.icon}></ha-icon>
+              <div class="entity-name">${name}</div>
+              <div class="entity-state">${stateObj.state} ${uom}</div>
             </div>
           `;
         })}
