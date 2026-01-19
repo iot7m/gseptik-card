@@ -65,8 +65,7 @@ export class TankCard extends LitElement implements LovelaceCard {
               }
             </ha-card>
             <ha-card class="statistic-card" @click=${() => this._openMoreInfo(this._config!.entities.x_level)}>
-              Критический уровень септика:
-              ${this.hass?.states?.[criticalLevel].state} %
+              Критический уровень септика: ${criticalLevel} %
             </ha-card>
             <ha-card class="statistic-card" @click=${() => this._openMoreInfo(this._config!.entities.temp)}>
               <ha-icon icon="mdi:thermometer"></ha-icon>
