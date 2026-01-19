@@ -102,8 +102,8 @@ export class CisternCard extends LitElement implements LovelaceCard {
   }
 
   private renderCistern() {
-    const level = getLevel(this.hass);
-    const criticalLevel = getCriticalLevel(this.hass);
+    const level = getLevel(this.hass, this._config!.entities.level);
+    const criticalLevel = getCriticalLevel(this.hass, this._config!.entities.x_level);
     const marks = [10, 20, 30, 40, 50, 60, 70, 80, 90];
 
     return html`

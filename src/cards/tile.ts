@@ -60,7 +60,7 @@ export class TileCard extends LitElement implements LovelaceCard {
   }
 
   render() {
-    const criticalLevel = getCriticalLevel(this.hass);
+    const criticalLevel = getCriticalLevel(this.hass, this._config!.entities.x_level);
 
     return html`
       <ha-card @click=${this._openDialog}>

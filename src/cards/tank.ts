@@ -96,8 +96,8 @@ export class TankCard extends LitElement implements LovelaceCard {
   }
 
   private renderTank() {
-    const level = getLevel(this.hass);
-    const criticalLevel = getCriticalLevel(this.hass);
+    const level = getLevel(this.hass, this._config!.entities.level);
+    const criticalLevel = getCriticalLevel(this.hass, this._config!.entities.x_level);
     const isCritical = level >= criticalLevel;
     const showBubbles = level > 10;
 
