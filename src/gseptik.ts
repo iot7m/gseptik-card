@@ -1,5 +1,5 @@
 // Import files
-import "@/cistern";
-import "@/dialogue";
-import "@/tank";
-import "@/tile";
+import "@/cards/cistern";
+import "@/cards/tank";
+import "@/cards/tile";
+import "@/dialogues/dialogue";

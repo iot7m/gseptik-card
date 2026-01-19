@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 
-import "@/tile";
+import "@/cards/tile";
 
 import { type LovelaceTestElement, createHassMock } from "@tests/hass";
 
