@@ -7,7 +7,8 @@ import type { HomeAssistant, LovelaceCard } from "custom-card-helpers";
 import type { GSeptikCardConfig } from "@/types/cards";
 import { GSEPTIK_ENTITY_DEFS } from "@/types/defs";
 
-import { getCriticalLevel, getLevel, toEntityId } from "@/utils/gseptik";
+import { assertAllEntities } from "@/utils/asserts";
+import { getCriticalLevel, getLevel, toEntityId } from "@/utils/extractors";
 
 import { CARD_PREFIX } from "@/const";
 
@@ -20,17 +21,7 @@ export class CisternCard extends LitElement implements LovelaceCard {
   hass?: HomeAssistant;
 
   setConfig(config: GSeptikCardConfig) {
-    if (
-      !config.entities?.level ||
-      !config.entities.temp ||
-      !config.entities.pressure ||
-      !config.entities.x_level ||
-      !config.entities.exceeds_x_level ||
-      !config.entities.error_name
-    ) {
-      throw new Error("All entities must be defined: level, temp, pressure, x_level, exceeds_x_level, error_name");
-    }
-
+    assertAllEntities(config);
     this._config = config;
     this.requestUpdate();
   }
@@ -70,8 +61,8 @@ export class CisternCard extends LitElement implements LovelaceCard {
   }
 
   private renderCistern() {
-    const level = getLevel(this.hass, toEntityId(this._config!.entities.level));
-    const criticalLevel = getCriticalLevel(this.hass, toEntityId(this._config!.entities.x_level));
+    const level = getLevel(this.hass, this._config!.entities.level);
+    const criticalLevel = getCriticalLevel(this.hass, this._config!.entities.x_level);
     const marks = [10, 20, 30, 40, 50, 60, 70, 80, 90];
 
     return html`
