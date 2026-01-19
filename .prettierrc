@@ -17,7 +17,7 @@
     "^@/types/(.*)",
     "^@/const(.*)",
     "^@/(.*)",
-    "^@tests/(.*)",
+    "^@tests/(.*)"
   ],
   "importOrderSeparation": true,
   "importOrderSortSpecifiers": true,
