@@ -1,10 +1,12 @@
 import { LitElement, css, html } from "lit";
 
-import { customElement, property } from "lit/decorators.js";
+import { customElement } from "lit/decorators.js";
 
 import type { HomeAssistant, LovelaceCardEditor } from "custom-card-helpers";
 
 import { GSeptikCardConfig } from "@/types/cards";
+
+import { assertAllEntities } from "@/utils/asserts";
 
 import { CARD_PREFIX } from "@/const";
 
@@ -12,23 +14,28 @@ export const CARD_NAME = `${CARD_PREFIX}-cistern-card-editor` as const;
 
 @customElement(CARD_NAME)
 export class CisternCardEditor extends LitElement implements LovelaceCardEditor {
-  @property({ attribute: false }) hass!: HomeAssistant;
-  @property({ attribute: false }) private _config!: GSeptikCardConfig;
+  private _config?: GSeptikCardConfig;
+  public hass?: HomeAssistant;
 
   setConfig(config: GSeptikCardConfig) {
+    assertAllEntities(config);
     this._config = {
       ...config,
       type: config.type ?? `custom:${CARD_NAME}`,
     };
+    this.requestUpdate();
   }
 
   private _valueChanged(ev: CustomEvent) {
+    console.log(ev);
+    /*
     const value = ev.detail.value;
 
     this._config = {
       ...this._config,
       entity: value,
     };
+    */
 
     this._fireConfigChanged();
   }
@@ -44,9 +51,7 @@ export class CisternCardEditor extends LitElement implements LovelaceCardEditor 
   }
 
   render() {
-    if (!this.hass) {
-      return html`<p>HASS not loaded</p>`;
-    }
+    if (!this._config || !this.hass) return html`<ha-card>Loading...</ha-card>`;
 
     return html`
       <ha-entity-picker
