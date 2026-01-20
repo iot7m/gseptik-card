@@ -28,7 +28,6 @@ export class CisternCard extends LitElement implements LovelaceCard {
   public hass?: HomeAssistant;
 
   setConfig(config: GSeptikCardConfig) {
-    console.log("NEW CONFIG", config);
     assertAllEntities(config);
     this._config = config;
     this.requestUpdate();

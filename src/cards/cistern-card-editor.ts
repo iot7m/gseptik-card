@@ -96,10 +96,12 @@ export class CisternCardEditor extends LitElement implements LovelaceCardEditor 
 
   private _formChanged(ev: CustomEvent) {
     this._config = {
+      ...this._config,
+      type: `custom:${CARD_PREFIX}-cistern-card`,
       entities: {
+        ...this._config.entities,
         ...ev.detail.value,
       },
-      type: `custom:${CARD_PREFIX}-cistern-card`,
     };
     this._fireConfigChanged();
   }
