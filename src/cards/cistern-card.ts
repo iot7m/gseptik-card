@@ -139,7 +139,6 @@ export class CisternCard extends LitElement implements LovelaceCard {
       border-radius: 50%;
       position: relative;
       overflow: hidden;
-
       background: #e6e6e6;
       border: 2px solid #9e9e9e;
       box-sizing: border-box;
@@ -241,6 +240,7 @@ export class CisternCard extends LitElement implements LovelaceCard {
     .mark[data-value="10"] {
       top: calc(90% - 0.7rem / 2);
     }
+
     .mark.active {
       color: #94cfff;
       font-weight: 600;
@@ -271,15 +271,6 @@ export class CisternCard extends LitElement implements LovelaceCard {
       font-size: var(--ha-font-size-m);
       font-weight: var(--ha-font-weight-normal);
       line-height: var(--ha-line-height-normal);
-      border-bottom: 1px solid var(--divider-color);
-    }
-
-    .entity-row:last-child {
-      border-bottom: none;
-    }
-
-    .entity-row:hover {
-      background: var(--secondary-background-color);
     }
 
     .entity-name {
