@@ -8,7 +8,7 @@ views:
     cards:
       - type: tile
         entity: climate.ecobee
-        name: Климат
+        name: Climate
       - type: custom:gseptik-tile-card
         entities:
           level: uroven_zhidkosti_septika
