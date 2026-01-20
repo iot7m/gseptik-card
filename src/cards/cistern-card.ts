@@ -17,8 +17,7 @@ export const CARD_NAME = `${CARD_PREFIX}-cistern-card` as const;
 @customElement(CARD_NAME)
 export class CisternCard extends LitElement implements LovelaceCard {
   private _config?: GSeptikCardConfig;
-
-  hass?: HomeAssistant;
+  public hass?: HomeAssistant;
 
   setConfig(config: GSeptikCardConfig) {
     assertAllEntities(config);
@@ -28,10 +27,6 @@ export class CisternCard extends LitElement implements LovelaceCard {
 
   getCardSize(): number {
     return 1;
-  }
-
-  firstUpdated() {
-    this.renderCistern();
   }
 
   static async getConfigElement() {
@@ -56,7 +51,8 @@ export class CisternCard extends LitElement implements LovelaceCard {
   }
 
   render() {
-    if (!this._config) return html`<ha-card>Loading...</ha-card>`;
+    if (!this._config || !this.hass) return html`<ha-card>Loading...</ha-card>`;
+
     return html`
       <ha-card>
         <h1 class="card-header">Септик</h1>

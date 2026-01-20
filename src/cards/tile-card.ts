@@ -21,8 +21,7 @@ interface GspeptikDialogueElement extends HTMLElement {
 @customElement(CARD_NAME)
 export class TileCard extends LitElement implements LovelaceCard {
   private _config?: GSeptikCardConfig;
-
-  hass?: HomeAssistant;
+  public hass?: HomeAssistant;
 
   setConfig(config: GSeptikCardConfig) {
     assertAllEntities(config);
@@ -42,6 +41,8 @@ export class TileCard extends LitElement implements LovelaceCard {
   }
 
   render() {
+    if (!this._config || !this.hass) return html`<ha-card>Loading...</ha-card>`;
+
     const criticalLevel = getCriticalLevel(this.hass, this._config!.entities.x_level);
 
     return html`
