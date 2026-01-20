@@ -1,7 +1,11 @@
 import type { LovelaceCardConfig } from "custom-card-helpers";
 
-export interface EntityCardConfig extends LovelaceCardConfig {
-  entity: string;
+import type { GSeptikEntityKey } from "@/types/defs";
+
+export type GSeptikEntitiesConfig = Record<GSeptikEntityKey, string>;
+
+export interface GSeptikCardConfig extends LovelaceCardConfig {
+  entities: GSeptikEntitiesConfig;
 }
 
 export interface EntityCardEditorConfig extends LovelaceCardConfig {
