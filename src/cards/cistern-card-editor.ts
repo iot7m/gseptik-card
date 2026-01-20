@@ -41,7 +41,7 @@ export class CisternCardEditor extends LitElement implements LovelaceCardEditor 
     return html`
       <ha-form
         .hass=${this.hass}
-        .data=${this._config}
+        .data=${{ entity: this._config.entity }}
         .schema=${[
           {
             name: "entity",
@@ -51,6 +51,7 @@ export class CisternCardEditor extends LitElement implements LovelaceCardEditor 
         @value-changed=${this._formChanged}
       >
       </ha-form>
+
     `;
   }
 
