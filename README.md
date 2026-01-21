@@ -13,7 +13,7 @@ GSeptik provides visual components to display:
 ## Table of contents
 
 - [Installation](#installation)
-  - [HACS (planned)](#hacs-installation)
+  - [HACS installation](#hacs-installation)
   - [Manual installation](#manual-installation)
     - [Using the UI](#using-the-ui)
     - [Using YAML](#using-yaml)
