@@ -23,8 +23,15 @@ import { CARD_EDITOR_NAME, CARD_NAME } from "@/const";
 @customElement(CARD_NAME)
 export class CisternCard extends LitElement implements LovelaceCard {
   private _config?: GSeptikCardConfig;
-  public hass?: HomeAssistant;
+  private _hass?: HomeAssistant;
 
+  public set hass(hass: HomeAssistant) {
+    this._hass = hass;
+    this.requestUpdate();
+  }
+  public get hass(): HomeAssistant {
+    return this._hass!;
+  }
   setConfig(config: GSeptikCardConfig) {
     assertAllEntities(config);
     this._config = config;
@@ -58,7 +65,7 @@ export class CisternCard extends LitElement implements LovelaceCard {
   }
 
   render() {
-    if (!this._config || !this.hass) return html``;
+    if (!this._config || !this._hass) return html``;
 
     return html`
       <ha-card>
@@ -69,9 +76,9 @@ export class CisternCard extends LitElement implements LovelaceCard {
   }
 
   private renderCistern() {
-    if (!this.hass || !this._config) return html``;
-    const level = getLevel(this.hass, this._config.entities.level);
-    const criticalLevel = getCriticalLevel(this.hass, this._config.entities.x_level);
+    if (!this._hass || !this._config) return html``;
+    const level = getLevel(this._hass, this._config.entities.level);
+    const criticalLevel = getCriticalLevel(this._hass, this._config.entities.x_level);
     const levelEntityId = getLevelEntityId(this._config.entities.level);
 
     const marks = [10, 20, 30, 40, 50, 60, 70, 80, 90];
