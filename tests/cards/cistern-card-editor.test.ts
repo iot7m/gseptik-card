@@ -5,7 +5,8 @@ import { CISTERN_CARD_EDITOR_NAME, CISTERN_CARD_NAME } from "@/const";
 
 import "@/cards/cistern-card-editor";
 
-import { type CardEditorTestElement, ENTITIES, createHassMock } from "@tests/hass";
+import { ENTITIES, createHassMock } from "@tests/fixtures";
+import { type CardEditorTestElement } from "@tests/types";
 
 describe("cistern-card-editor", () => {
   it("renders ha-form when hass and config are provided", async () => {
