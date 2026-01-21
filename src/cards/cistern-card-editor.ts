@@ -6,13 +6,13 @@ import type { HomeAssistant, LovelaceCardEditor } from "custom-card-helpers";
 
 import { GSpepticCardEditorConfig } from "@/types/cards";
 
-import { CARD_EDITOR_NAME, CARD_NAME } from "@/const";
+import { CISTERN_CARD_EDITOR_NAME, CISTERN_CARD_NAME } from "@/const";
 
-@customElement(CARD_EDITOR_NAME)
+@customElement(CISTERN_CARD_EDITOR_NAME)
 export class CisternCardEditor extends LitElement implements LovelaceCardEditor {
   private _hass?: HomeAssistant;
   private _config: GSpepticCardEditorConfig = {
-    type: `custom:${CARD_EDITOR_NAME}`,
+    type: `custom:${CISTERN_CARD_EDITOR_NAME}`,
   };
 
   public set hass(hass: HomeAssistant) {
@@ -71,7 +71,7 @@ export class CisternCardEditor extends LitElement implements LovelaceCardEditor 
   setConfig(config: GSpepticCardEditorConfig) {
     this._config = {
       ...config,
-      type: config.type ?? `custom:${CARD_NAME}`,
+      type: config.type ?? `custom:${CISTERN_CARD_NAME}`,
     };
   }
 
@@ -102,7 +102,7 @@ export class CisternCardEditor extends LitElement implements LovelaceCardEditor 
   private _formChanged(ev: CustomEvent) {
     this._config = {
       ...this._config,
-      type: `custom:${CARD_NAME}`,
+      type: `custom:${CISTERN_CARD_NAME}`,
       entities: {
         ...this._config.entities,
         ...ev.detail.value,

@@ -18,9 +18,9 @@ import {
   getUnitOfMeasure,
 } from "@/utils/extractors";
 
-import { CARD_EDITOR_NAME, CARD_NAME } from "@/const";
+import { CISTERN_CARD_EDITOR_NAME, CISTERN_CARD_NAME } from "@/const";
 
-@customElement(CARD_NAME)
+@customElement(CISTERN_CARD_NAME)
 export class CisternCard extends LitElement implements LovelaceCard {
   private _config?: GSeptikCardConfig;
   private _hass?: HomeAssistant;
@@ -44,14 +44,14 @@ export class CisternCard extends LitElement implements LovelaceCard {
 
   static getStubConfig() {
     return {
-      type: `custom:${CARD_NAME}`,
+      type: `custom:${CISTERN_CARD_NAME}`,
       entities: Object.fromEntries(GSEPTIK_ENTITY_DEFS.map((d) => [d.key, getEntityId(String(d.key))])),
     };
   }
 
   static async getConfigElement() {
     await import("@/cards/cistern-card-editor");
-    return document.createElement(`${CARD_EDITOR_NAME}`);
+    return document.createElement(`${CISTERN_CARD_EDITOR_NAME}`);
   }
 
   private _openMoreInfo(entityId: string) {
@@ -295,7 +295,7 @@ export class CisternCard extends LitElement implements LovelaceCard {
 
 window.customCards = window.customCards || [];
 window.customCards.push({
-  type: CARD_NAME,
+  type: CISTERN_CARD_NAME,
   name: "G-Septik Cistern",
   description: "Cistern card for G-Septik septic sensor",
 });
