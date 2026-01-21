@@ -12,14 +12,22 @@ import { getCriticalLevel } from "@/utils/extractors";
 import { CARD_DIALOG, CARD_TILE } from "@/const";
 
 interface GspeptikDialogueElement extends HTMLElement {
-  hass?: HomeAssistant;
+  _hass?: HomeAssistant;
   entity: string;
 }
 
 @customElement(CARD_TILE)
 export class TileCard extends LitElement implements LovelaceCard {
   private _config?: GSeptikCardConfig;
-  public hass?: HomeAssistant;
+  private _hass?: HomeAssistant;
+
+  public set hass(hass: HomeAssistant) {
+    this._hass = hass;
+    this.requestUpdate();
+  }
+  public get hass(): HomeAssistant {
+    return this._hass!;
+  }
 
   setConfig(config: GSeptikCardConfig) {
     assertAllEntities(config);
@@ -38,16 +46,16 @@ export class TileCard extends LitElement implements LovelaceCard {
 
     const dialog = document.createElement(CARD_DIALOG) as GspeptikDialogueElement;
 
-    dialog.hass = this.hass;
+    dialog._hass = this._hass;
     dialog.entity = this._config.entity;
 
     document.body.appendChild(dialog);
   }
 
   render() {
-    if (!this._config || !this.hass) return html``;
+    if (!this._config || !this._hass) return html``;
 
-    const criticalLevel = getCriticalLevel(this.hass, this._config!.entities.x_level);
+    const criticalLevel = getCriticalLevel(this._hass, this._config!.entities.x_level);
 
     return html`
       <ha-card @click=${this._openDialog}>
