@@ -22,11 +22,17 @@ export type GSeptikCardConfig = {
   entities: GSeptikEntitiesConfig;
 };
 
-export interface LovelaceTestElement extends HTMLElement {
-  setConfig(config: GSeptikCardConfig): void;
+export type CardTestElement = HTMLElement & {
   hass?: HassLike;
+  setConfig(config: GSeptikCardConfig): void;
   updateComplete: Promise<void>;
-}
+};
+
+export type CardEditorTestElement = HTMLElement & {
+  hass: unknown;
+  setConfig(config: unknown): void;
+  updateComplete: Promise<void>;
+};
 
 export const ENTITIES: GSeptikEntitiesConfig = {
   level: "sensor.uroven_zhidkosti_septika",

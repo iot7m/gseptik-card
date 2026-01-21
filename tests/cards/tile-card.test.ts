@@ -5,11 +5,11 @@ import { TILE_CARD_NAME } from "@/const";
 
 import "@/cards/tile-card";
 
-import { ENTITIES, type LovelaceTestElement, createHassMock } from "@tests/hass";
+import { type CardTestElement, ENTITIES, createHassMock } from "@tests/hass";
 
 describe("tile-card", () => {
   it("renders without crashing when hass and config are provided", async () => {
-    const el = document.createElement(TILE_CARD_NAME) as LovelaceTestElement;
+    const el = document.createElement(TILE_CARD_NAME) as CardTestElement;
     el.setConfig({ entities: ENTITIES });
     el.hass = createHassMock();
 
