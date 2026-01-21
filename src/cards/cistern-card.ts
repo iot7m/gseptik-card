@@ -45,7 +45,7 @@ export class CisternCard extends LitElement implements LovelaceCard {
   static getStubConfig() {
     return {
       type: `custom:${CARD_NAME}`,
-      entities: Object.fromEntries(GSEPTIK_ENTITY_DEFS.map((d) => [d.key, `sensor.${String(d.key)}`])),
+      entities: Object.fromEntries(GSEPTIK_ENTITY_DEFS.map((d) => [d.key, getEntityId(String(d.key))])),
     };
   }
 
