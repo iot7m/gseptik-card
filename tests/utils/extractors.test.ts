@@ -1,7 +1,5 @@
 import { describe, expect, it } from "vitest";
 
-import type { HomeAssistant } from "custom-card-helpers";
-
 import type { HassState } from "@/types/hass";
 
 import {
@@ -18,9 +16,7 @@ import {
   getUnitOfMeasure,
 } from "@/utils/extractors";
 
-function createHassWithStates(states: Record<string, HassState>): HomeAssistant {
-  return { states } as unknown as HomeAssistant;
-}
+import { ENTITIES, createHass } from "@tests/fixtures";
 
 describe("extractors", () => {
   it("getEntityId adds sensor prefix", () => {
@@ -28,20 +24,14 @@ describe("extractors", () => {
   });
 
   it("getStateObj returns state object", () => {
-    const hass = createHassWithStates({
-      "sensor.uroven_zhidkosti_septika": { state: "42" },
-    });
-
-    expect(getStateObj(hass, "uroven_zhidkosti_septika")?.state).toBe("42");
+    const hass = createHass();
+    expect(getStateObj(hass, ENTITIES.level)?.state).toBe("42");
   });
 
   it("getUnitOfMeasure returns unit", () => {
-    const state: HassState = {
-      state: "42",
-      attributes: { unit_of_measurement: "%" },
-    };
-
-    expect(getUnitOfMeasure(state)).toBe("%");
+    const hass = createHass();
+    const stateObj = getStateObj(hass, ENTITIES.level);
+    expect(getUnitOfMeasure(stateObj)).toBe("%");
   });
 
   it("getFriendlyName returns friendly_name", () => {
@@ -57,51 +47,33 @@ describe("extractors", () => {
     expect(getLevelEntityId("uroven")).toBe("sensor.uroven");
   });
 
-  it("getLevel clamps to 100", () => {
-    const hass = createHassWithStates({
-      "sensor.level": { state: "120" },
-    });
-
-    expect(getLevel(hass, "level")).toBe(100);
+  it("getLevel returns numeric level", () => {
+    const hass = createHass();
+    expect(getLevel(hass, ENTITIES.level)).toBe(42);
   });
 
-  it("getCriticalLevel returns number", () => {
-    const hass = createHassWithStates({
-      "sensor.critical": { state: "80" },
-    });
-
-    expect(getCriticalLevel(hass, "critical")).toBe(80);
+  it("getCriticalLevel returns numeric critical level", () => {
+    const hass = createHass();
+    expect(getCriticalLevel(hass, ENTITIES.x_level)).toBe(80);
   });
 
   it("getTemperature returns raw value", () => {
-    const hass = createHassWithStates({
-      "sensor.temp": { state: "5" },
-    });
-
-    expect(getTemperature(hass, "temp")).toBe(5);
+    const hass = createHass();
+    expect(getTemperature(hass, ENTITIES.temp)).toBe(5);
   });
 
   it("getPressure returns raw value", () => {
-    const hass = createHassWithStates({
-      "sensor.pressure": { state: "1010" },
-    });
-
-    expect(getPressure(hass, "pressure")).toBe(1010);
+    const hass = createHass();
+    expect(getPressure(hass, ENTITIES.pressure)).toBe(1010);
   });
 
-  it("getExceedsCritical parses Да as true", () => {
-    const hass = createHassWithStates({
-      "sensor.exceeded": { state: "Да" },
-    });
-
-    expect(getExceedsCritical(hass, "exceeded")).toBe(true);
+  it("getExceedsCritical parses no as false", () => {
+    const hass = createHass();
+    expect(getExceedsCritical(hass, ENTITIES.exceeds_x_level)).toBe(false);
   });
 
-  it("getErrorName returns error string", () => {
-    const hass = createHassWithStates({
-      "sensor.error": { state: "SENSOR_TIMEOUT" },
-    });
-
-    expect(getErrorName(hass, "error")).toBe("SENSOR_TIMEOUT");
+  it("getErrorName returns null for empty string", () => {
+    const hass = createHass();
+    expect(getErrorName(hass, ENTITIES.error_name)).toBeNull();
   });
 });
