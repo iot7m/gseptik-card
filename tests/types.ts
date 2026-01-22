@@ -21,3 +21,9 @@ export type CardEditorTestElement = HTMLElement & {
   setConfig(config: GSpepticCardEditorConfig): void;
   updateComplete: Promise<void>;
 };
+
+export type DialogTestElement = HTMLElement & {
+  hass: unknown;
+  entity: unknown;
+  updateComplete: Promise<void>;
+};

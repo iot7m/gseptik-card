@@ -1,6 +1,6 @@
 import { LitElement, css, html } from "lit";
 
-import { customElement, property, state } from "lit/decorators.js";
+import { customElement, state } from "lit/decorators.js";
 
 import type { HomeAssistant } from "custom-card-helpers";
 
@@ -8,10 +8,23 @@ import { GSEPTIK_DIALOG_NAME } from "@/const";
 
 @customElement(GSEPTIK_DIALOG_NAME)
 export class GSeptikDialog extends LitElement {
-  @property({ attribute: false }) hass!: HomeAssistant;
-  @property() entity!: string;
+  private entity!: string;
+  private _hass?: HomeAssistant;
+  @state() declare private _tab: number;
 
-  @state() private _tab = 0;
+  constructor() {
+    super();
+    this._tab = 0;
+  }
+
+  public set hass(hass: HomeAssistant) {
+    this._hass = hass;
+    this.requestUpdate();
+  }
+
+  public get hass(): HomeAssistant {
+    return this._hass!;
+  }
 
   private get septicLevel() {
     const value = Number(this.hass?.states["sensor.uroven_zhidkosti_septika"]?.state);
