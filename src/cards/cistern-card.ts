@@ -103,7 +103,7 @@ export class CisternCard extends LitElement implements LovelaceCard {
               </div>
             `,
           )}
-          <div class="mark-critical">&mdash;${criticalLevel}%&mdash;</div>
+          <div class="mark-critical"></div>
         </div>
         <div class="center-label">${Math.round(level)}%</div>
         <div class="water ${isCritical ? "water-critical" : ""}">
@@ -163,7 +163,10 @@ export class CisternCard extends LitElement implements LovelaceCard {
 
     .center-label {
       position: absolute;
-      inset: 0;
+      // inset: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      left: 55%;
       display: grid;
       place-items: center;
       font-family: var(--ha-font-family-heading);
@@ -202,7 +205,7 @@ export class CisternCard extends LitElement implements LovelaceCard {
       z-index: 3;
       box-sizing: border-box;
       position: absolute;
-      inset: 0 62% 0 12%;
+      inset: 0px 60% 0px 22%;
       pointer-events: none;
       display: flex;
       flex-direction: column;
@@ -211,24 +214,26 @@ export class CisternCard extends LitElement implements LovelaceCard {
 
     .mark-critical {
       position: absolute;
-      left: -25%;
-      bottom: calc(var(--critical) * 1% - 0.7rem);
-      width: 100%;
+      width: 320px;
+      height: 2px;
+      z-index: 2;
+      left: -130%;
+      bottom: calc(var(--critical) * 1% - 1px);
       display: flex;
       align-items: center;
-      font-size: 0.7rem;
-      color: #e32636;
+      background-color: #e32636;
       box-sizing: border-box;
       white-space: nowrap;
     }
 
     .mark {
+      z-index: 3;
       position: absolute;
       left: 0;
       width: 100%;
       display: flex;
       align-items: center;
-      font-size: 0.7rem;
+      font-size: 1.4rem;
       color: #87b4d9;
       box-sizing: border-box;
       white-space: nowrap;
@@ -242,31 +247,40 @@ export class CisternCard extends LitElement implements LovelaceCard {
     }
 
     .mark[data-value="90"] {
-      top: calc(10% - 0.7rem / 2);
+      top: 10%;
+      transform: translateY(-50%);
     }
     .mark[data-value="80"] {
-      top: calc(20% - 0.7rem / 2);
+      top: 20%;
+      transform: translateY(-50%);
     }
     .mark[data-value="70"] {
-      top: calc(30% - 0.7rem / 2);
+      top: 30%;
+      transform: translateY(-50%);
     }
     .mark[data-value="60"] {
-      top: calc(40% - 0.7rem / 2);
+      top: 40%;
+      transform: translateY(-50%);
     }
     .mark[data-value="50"] {
-      top: calc(50% - 0.7rem / 2);
+      top: 50%;
+      transform: translateY(-50%);
     }
     .mark[data-value="40"] {
-      top: calc(60% - 0.7rem / 2);
+      top: 60%;
+      transform: translateY(-50%);
     }
     .mark[data-value="30"] {
-      top: calc(70% - 0.7rem / 2);
+      top: 70%;
+      transform: translateY(-50%);
     }
     .mark[data-value="20"] {
-      top: calc(80% - 0.7rem / 2);
+      top: 80%;
+      transform: translateY(-50%);
     }
     .mark[data-value="10"] {
-      top: calc(90% - 0.7rem / 2);
+      top: 90%;
+      transform: translateY(-50%);
     }
 
     .mark.active {
