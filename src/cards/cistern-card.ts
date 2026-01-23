@@ -82,13 +82,15 @@ export class CisternCard extends LitElement implements LovelaceCard {
     const level = getLevel(this._hass, this._config.entities.level);
     const criticalLevel = getCriticalLevel(this._hass, this._config.entities.x_level);
     const levelEntityId = getLevelEntityId(this._config.entities.level);
+    // Should we use extractor getExceedsCritical?
+    const isCritical = level >= criticalLevel;
 
     const marks = [10, 20, 30, 40, 50, 60, 70, 80, 90];
 
     return html`
       <div
         class="cistern"
-        style="--level: ${level}; --critical: ${criticalLevel}"
+        style="--level: ${level}; --critical: ${criticalLevel}; --is-critical: ${isCritical ? 1 : 0}"
         @click=${() => this._openMoreInfo(levelEntityId)}
       >
         <div class="scale">
@@ -102,10 +104,10 @@ export class CisternCard extends LitElement implements LovelaceCard {
               </div>
             `,
           )}
-          <div class="mark-critical">&mdash;${criticalLevel}%&mdash;</div>
+          <div class="mark-critical"></div>
         </div>
-
-        <div class="water">
+        <div class="center-label">${Math.round(level)}%</div>
+        <div class="water ${isCritical ? "water-critical" : ""}">
           <div class="water-line"></div>
         </div>
       </div>
@@ -146,8 +148,9 @@ export class CisternCard extends LitElement implements LovelaceCard {
       border-radius: 50%;
       position: relative;
       overflow: hidden;
-      background: #e6e6e6;
-      border: 2px solid #9e9e9e;
+
+      background: var(--secondary-background-color);
+      border: 2px solid var(--divider-color);
       box-sizing: border-box;
     }
 
@@ -157,6 +160,22 @@ export class CisternCard extends LitElement implements LovelaceCard {
       align-items: stretch;
       gap: 12px;
       min-width: 0;
+    }
+
+    .center-label {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      left: 55%;
+      display: grid;
+      place-items: center;
+      font-family: var(--ha-font-family-heading);
+      font-size: 2.4rem;
+      font-weight: 700;
+      line-height: 1;
+      color: var(--primary-text-color);
+      pointer-events: none;
+      z-index: 4;
     }
 
     .water {
@@ -178,11 +197,15 @@ export class CisternCard extends LitElement implements LovelaceCard {
       box-sizing: border-box;
     }
 
+    .water-critical {
+      background: linear-gradient(to top, var(--error-color, #d32f2f));
+    }
+
     .scale {
-      z-index: 1;
+      z-index: 3;
       box-sizing: border-box;
       position: absolute;
-      inset: 0 45%;
+      inset: 0px 60% 0px 22%;
       pointer-events: none;
       display: flex;
       flex-direction: column;
@@ -191,23 +214,26 @@ export class CisternCard extends LitElement implements LovelaceCard {
 
     .mark-critical {
       position: absolute;
-      left: -25%;
-      bottom: calc(var(--critical) * 1% - 0.7rem);
-      width: 100%;
+      width: 320px;
+      height: 2px;
+      z-index: 2;
+      left: -130%;
+      bottom: calc(var(--critical) * 1% - 1px);
       display: flex;
       align-items: center;
-      font-size: 0.7rem;
-      color: #e32636;
+      background-color: #e32636;
       box-sizing: border-box;
       white-space: nowrap;
     }
+
     .mark {
+      z-index: 3;
       position: absolute;
       left: 0;
       width: 100%;
       display: flex;
       align-items: center;
-      font-size: 0.7rem;
+      font-size: 1.4rem;
       color: #87b4d9;
       box-sizing: border-box;
       white-space: nowrap;
@@ -221,31 +247,40 @@ export class CisternCard extends LitElement implements LovelaceCard {
     }
 
     .mark[data-value="90"] {
-      top: calc(10% - 0.7rem / 2);
+      top: 10%;
+      transform: translateY(-50%);
     }
     .mark[data-value="80"] {
-      top: calc(20% - 0.7rem / 2);
+      top: 20%;
+      transform: translateY(-50%);
     }
     .mark[data-value="70"] {
-      top: calc(30% - 0.7rem / 2);
+      top: 30%;
+      transform: translateY(-50%);
     }
     .mark[data-value="60"] {
-      top: calc(40% - 0.7rem / 2);
+      top: 40%;
+      transform: translateY(-50%);
     }
     .mark[data-value="50"] {
-      top: calc(50% - 0.7rem / 2);
+      top: 50%;
+      transform: translateY(-50%);
     }
     .mark[data-value="40"] {
-      top: calc(60% - 0.7rem / 2);
+      top: 60%;
+      transform: translateY(-50%);
     }
     .mark[data-value="30"] {
-      top: calc(70% - 0.7rem / 2);
+      top: 70%;
+      transform: translateY(-50%);
     }
     .mark[data-value="20"] {
-      top: calc(80% - 0.7rem / 2);
+      top: 80%;
+      transform: translateY(-50%);
     }
     .mark[data-value="10"] {
-      top: calc(90% - 0.7rem / 2);
+      top: 90%;
+      transform: translateY(-50%);
     }
 
     .mark.active {
