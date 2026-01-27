@@ -1,4 +1,4 @@
-= Voice assistants
+= Usage
 :description: Control IoT7m smart home with Yandex Alice, Google Assistant, and Siri: run scenarios, manage devices, and get voice updates via Home Assistant.
 :keywords: IoT7m, smart home, voice control, Home Assistant, Yandex Alice, Google Assistant, Siri, automation, scenarios, local gateway, cloud integration
 

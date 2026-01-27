@@ -1,4 +1,4 @@
-= IoT7m
+= GSeptick Card
 :description: IoT7m smart home system with Home Assistant: automation, remote control, Zigbee, Wi-Fi, Z-Wave, and voice assistants with focus on security.
 :keywords: smart home, IoT7m, Home Assistant, automation, remote control, security, Zigbee, Z-Wave, Wi-Fi, ESPHome, Tasmota, leak detector, temperature sensor, motion sensor, relay, valve, smart socket, heating controller, meter, voice control, Yandex Alice, Google Assistant, Siri, scenarios
 :navtitle:  Overview

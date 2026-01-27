@@ -1,4 +1,4 @@
-= IoT7m
+= GSeptick Card
 :description: Система умного дома IoT7m на базе Home Assistant: автоматизация, удалённое управление, Zigbee, Wi-Fi, Z-Wave и голосовые ассистенты.
 :keywords: умный дом, IoT7m, Home Assistant, автоматизация, удалённое управление, безопасность, Zigbee, Z-Wave, Wi-Fi, ESPHome, Tasmota, датчик протечки, датчик температуры, датчик движения, реле, клапан, умная розетка, контроллер отопления, счётчик, голосовое управление, Яндекс Алиса, Google Assistant, Siri, сценарии
 :navtitle: Обзор
