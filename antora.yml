@@ -1,0 +1,7 @@
+name: gseptik-card
+title: GSeptic Card
+version: latest
+prerelease:
+nav:
+  - modules/devices/nav.adoc
+  - modules/voice-assistants/nav.adoc
