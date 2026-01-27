@@ -27,8 +27,14 @@ export class CisternCard extends LitElement implements LovelaceCard {
   private _hass?: HomeAssistant;
 
   setConfig(config: GSeptikCardConfig) {
-    assertAllEntities(config);
-    this._config = config;
+    const extendedConfig = {
+      ...config,
+      show_pressure: this._config?.show_pressure ?? true,
+      show_x_level: this._config?.show_x_level ?? true,
+      show_header: this._config?.show_header ?? false,
+    };
+    assertAllEntities(extendedConfig);
+    this._config = extendedConfig;
     this.requestUpdate();
   }
 
@@ -49,6 +55,9 @@ export class CisternCard extends LitElement implements LovelaceCard {
     return {
       type: `custom:${CISTERN_CARD_NAME}`,
       entities: Object.fromEntries(GSEPTIK_ENTITY_DEFS.map((d) => [d.key, getEntityId(String(d.key))])),
+      show_pressure: true,
+      show_x_level: true,
+      show_header: false,
     };
   }
 
@@ -72,7 +81,7 @@ export class CisternCard extends LitElement implements LovelaceCard {
 
     return html`
       <ha-card>
-        <h1 class="card-header">Септик</h1>
+        ${this._config.show_header ? html`<h1 class="card-header">Септик</h1>` : null}
         <div class="card-box">${this.renderCistern()} ${this.renderEntities()}</div>
       </ha-card>
     `;
@@ -116,7 +125,24 @@ export class CisternCard extends LitElement implements LovelaceCard {
     if (!this.hass || !this._config) return html``;
     return html`
       <div class="entities">
-        ${GSEPTIK_ENTITY_DEFS.map((def) => {
+        ${GSEPTIK_ENTITY_DEFS.filter((def) => {
+          switch (def.key) {
+            case "pressure":
+              return !!this._config?.show_pressure !== false;
+            case "x_level":
+              return !!this._config?.show_x_level !== false;
+            case "level":
+              return !!this._config?.show_level !== false;
+            case "exceeds_x_level":
+              return !!this._config?.show_exceeds_x_level !== false;
+            case "temp":
+              return !!this._config?.show_temp !== false;
+            case "error_name":
+              return !!this._config?.show_error_name !== false;
+            default:
+              return false;
+          }
+        }).map((def) => {
           const configured = this._config!.entities[def.key];
           const entityId = getEntityId(configured);
           const stateObj = getStateObj(this.hass, configured);
