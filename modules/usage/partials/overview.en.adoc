@@ -8,4 +8,3 @@ This allows you to turn devices on or off, run automation scenarios (e.g., "Good
 
 The system is based on *Home Assistant*, so voice control works through cloud integrations or local gateways.
 
-Learn more about setting up xref:yandex-alice/overview.adoc[Yandex Alice]
