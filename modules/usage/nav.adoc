@@ -1,4 +1,1 @@
 * xref:overview.adoc[]
-** xref:yandex-alice/overview.adoc[][]
-*** xref:yandex-alice/aqara.adoc[][]
-*** xref:yandex-alice/xiaomi.adoc[][]
