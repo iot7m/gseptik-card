@@ -15,6 +15,9 @@
 # Ignore artifacts
 dist
 
+# Ignore ascii docs
+modules
+
 # Ignore node modules
 node_modules
 
