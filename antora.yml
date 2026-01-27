@@ -3,5 +3,6 @@ title: GSeptic Card
 version: latest
 prerelease:
 nav:
-  - modules/devices/nav.adoc
-  - modules/voice-assistants/nav.adoc
+  - modules/installation/nav.adoc
+  - modules/usage/nav.adoc
+  - modules/usage/changelogs.adoc
