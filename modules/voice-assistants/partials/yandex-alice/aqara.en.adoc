@@ -1,0 +1,14 @@
+= Aqara
+:description: Aqara skill for Yandex Alice: control lights, outlets, curtains, and sensors with voice commands via Home Assistant and IoT7m Zigbee gateway.
+:keywords: IoT7m, smart home, Aqara, Yandex Alice, voice control, Home Assistant, Zigbee, lights, outlets, curtains, sensors, automation, scenarios, temperature, motion, contact sensor
+
+The *Aqara skill for Yandex Alice* allows you to control devices in the Aqara ecosystem using the *Yandex Alice* voice assistant.
+
+You can turn lights and outlets on or off, check temperature and humidity, run voice scenarios, and get data from various sensors. The skill works via *Home Assistant* integration and the IoT7m Zigbee gateway.
+
+== Features:
+
+- Control lights, outlets, curtains, and other Aqara devices
+- Run voice automation scenes (e.g., "Alice, I’m home")
+- Receive data from temperature, contact, motion, and other sensors
+- Integrated with Home Assistant via Zigbee

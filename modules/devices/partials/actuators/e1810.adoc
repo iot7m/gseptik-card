@@ -1,0 +1,2 @@
+ifndef::page-locale[:page-locale: en]
+include::e1810.{page-locale}.adoc[]

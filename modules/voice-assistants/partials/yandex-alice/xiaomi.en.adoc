@@ -1,0 +1,14 @@
+= Xiaomi
+:description: Xiaomi skill for Yandex Alice: voice control of lights, sockets, blinds, and sensors via Home Assistant and IoT7m Zigbee gateway.
+:keywords: IoT7m, smart home, Xiaomi, Yandex Alice, voice control, Home Assistant, Zigbee, lights, sockets, blinds, sensors, automation, scenarios, temperature, humidity, motion, contact sensor
+
+The *Xiaomi skill for Yandex Alice* enables voice control of Xiaomi ecosystem devices using the *Yandex Alice* voice assistant.
+
+You can turn lights and sockets on or off, access sensor data, and run scenes. The skill works via *Home Assistant* and the IoT7m Zigbee gateway with support for Xiaomi devices.
+
+== Features:
+
+- Voice control of lighting, sockets, blinds, and other Xiaomi devices
+- Receive data from temperature, humidity, motion, contact sensors, and more
+- Trigger automation scenes (e.g., "Alice, good night")
+- Integrated with Home Assistant via Zigbee

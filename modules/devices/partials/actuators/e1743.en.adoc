@@ -1,0 +1,35 @@
+= On/Off Switch
+:description: IKEA TRÅDFRI On/Off Switch (E1743): compact Zigbee remote for lights and automations. Works with Home Assistant via Zigbee2MQTT or ZHA.
+:keywords: IoT7m, smart home, IKEA, TRÅDFRI, E1743, On/Off Switch, Zigbee, Zigbee2MQTT, ZHA, Home Assistant, wireless switch, remote control, lighting, automations
+
+[cols="1,3", options="header"]
+|===
+| Parameter | Value
+
+| Name
+| E1743 — TRÅDFRI On/Off Switch (IKEA)
+
+| Image
+| image:e1743.png[E1743]
+
+| Overview
+| A compact wireless switch by IKEA. Enables control of Zigbee lights and devices. Battery-powered and usable as a wall switch or portable remote.
+
+| Features
+| - Supports single and double press
+- Fully configurable in Home Assistant
+- Minimalist and ergonomic design
+- Powered by a coin-cell battery
+- Easily integrates via Zigbee2MQTT
+
+| Specifications
+| - Model: E1743
+- Manufacturer: IKEA
+- Protocol: Zigbee
+- Power: 1× CR2032
+- Dimensions: 45×45×10 mm
+- Compatibility: Zigbee2MQTT, ZHA
+
+| Usage in the IoT7m system
+| The switch can be used to control lights, scenes (e.g., "Night", "Leaving Home"), or trigger automations. Configured via Home Assistant.
+|===

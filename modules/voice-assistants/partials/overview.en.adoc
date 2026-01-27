@@ -1,0 +1,11 @@
+= Voice assistants
+:description: Control IoT7m smart home with Yandex Alice, Google Assistant, and Siri: run scenarios, manage devices, and get voice updates via Home Assistant.
+:keywords: IoT7m, smart home, voice control, Home Assistant, Yandex Alice, Google Assistant, Siri, automation, scenarios, local gateway, cloud integration
+
+You can control your *IoT7m* smart home using popular voice assistants such as *Yandex Alice*, *Google Assistant*, and *Apple Siri*.
+
+This allows you to turn devices on or off, run automation scenarios (e.g., "Good morning", "I’m away"), and get spoken updates about your home’s status.
+
+The system is based on *Home Assistant*, so voice control works through cloud integrations or local gateways.
+
+Learn more about setting up xref:yandex-alice/overview.adoc[Yandex Alice]

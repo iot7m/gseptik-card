@@ -1,0 +1,2 @@
+ifndef::page-locale[:page-locale: en]
+include::partial$/yandex-alice/aqara.{page-locale}.adoc[]

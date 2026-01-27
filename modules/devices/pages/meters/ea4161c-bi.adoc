@@ -1,0 +1,2 @@
+ifndef::page-locale[:page-locale: en]
+include::partial$meters/ea4161c-bi.{page-locale}.adoc[]
