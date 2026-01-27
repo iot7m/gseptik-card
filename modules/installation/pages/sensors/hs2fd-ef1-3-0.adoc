@@ -1,0 +1,2 @@
+ifndef::page-locale[:page-locale: en]
+include::partial$sensors/hs2fd-ef1-3-0.{page-locale}.adoc[]
