@@ -1,2 +1,0 @@
-ifndef::page-locale[:page-locale: en]
-include::partial$/yandex-alice/xiaomi.{page-locale}.adoc[]
