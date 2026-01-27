@@ -1,59 +1,89 @@
-= Usage
-:description: Using GSeptik Card in Home Assistant — adding custom cards to dashboards via the visual editor or YAML configuration.
-:keywords: GSeptik, Home Assistant, usage, dashboard, Lovelace, custom card, YAML, visual editor
-:navtitle: Usage
+= Configuration
+:description: Configuration of GSeptik Card in Home Assistant — entity parameters, display options, and a full YAML configuration example.
+:keywords: GSeptik, Home Assistant, configuration, entities, parameters, Lovelace, YAML, custom card
+:navtitle: Configuration
 
-*GSeptik Card* is used to display septic tank monitoring data in the *Home Assistant* interface.
+This section describes the available configuration options for *GSeptik Card*.
 
-The cards can be added to Home Assistant dashboards using standard methods: through the visual editor (UI) or directly via Lovelace YAML configuration.
+The card is configured using YAML and relies on Home Assistant entities to display parameters of the septic tank monitoring system. New parameters may be added in future versions.
 
-The following interface elements are available as part of the project:
+== Entities
 
-- *GSeptik Cistern Card* (`custom:gseptik-cistern-card`)
-- *GSeptik Tile Card* (`custom:gseptik-tile-card`)
-- *GSeptik Badge* (`custom:gseptik-badge`)
+Each entity represents a specific system parameter and may define a custom icon.
 
-== Using the UI (Visual editor)
+[cols="1,2,1,3",options="header"]
+|===
+| Key | Entity example | Icon | Description
 
-Adding a card via the visual editor is suitable for most users and does not require manual editing of YAML files.
+| `level`
+| `sensor.uroven_zhidkosti_septika`
+| `mdi:water-percent`
+| Current septic tank fill level
 
-1. Open any dashboard in Home Assistant.
-2. Click *Edit dashboard*.
-3. Select *Add card*.
-4. Choose *Manual card*.
-5. Paste the card configuration and save the changes.
+| `temp`
+| `sensor.temperatura_septika`
+| `mdi:thermometer`
+| Septic tank temperature
 
-Example configuration:
+| `pressure`
+| `sensor.davlenie_septika`
+| `mdi:gauge`
+| Internal pressure
+
+| `x_level`
+| `sensor.kriticheskii_uroven_septika`
+| `mdi:water-alert`
+| Critical level threshold
+
+| `exceeds_x_level`
+| `sensor.prevyshen_kriticheskii_uroven_septika`
+| `mdi:alert-octagon-outline`
+| Indicates critical level exceeded
+
+| `error_name`
+| `sensor.oshibka_septika`
+| `mdi:alert-circle-outline`
+| Error state or error description
+|===
+
+== Display options
+
+Display options control the visual appearance of the card.
+
+[cols="1,1,1,3",options="header"]
+|===
+| Parameter | Type | Default | Description
+
+| `show_title`
+| boolean
+| `true`
+| Show or hide the card title
+|===
+
+== Example configuration
+
+Example of a full card configuration with entities and custom icons:
 
 ```yaml
 type: custom:gseptik-cistern-card
+show_title: true
 entities:
-  level: uroven_zhidkosti_septika
-  temp: temperatura_septika
-  pressure: davlenie_septika
-  x_level: kriticheskii_uroven_septika
-  exceeds_x_level: prevyshen_kriticheskii_uroven_septika
-  error_name: oshibka_septika
+  level:
+    entity: sensor.uroven_zhidkosti_septika
+    icon: mdi:water-percent
+  temp:
+    entity: sensor.temperatura_septika
+    icon: mdi:thermometer
+  pressure:
+    entity: sensor.davlenie_septika
+    icon: mdi:gauge
+  x_level:
+    entity: sensor.kriticheskii_uroven_septika
+    icon: mdi:water-alert
+  exceeds_x_level:
+    entity: sensor.prevyshen_kriticheskii_uroven_septika
+    icon: mdi:alert-octagon-outline
+  error_name:
+    entity: sensor.oshibka_septika
+    icon: mdi:alert-circle-outline
 ```
-
-== Using YAML (Raw configuration)
-
-If Home Assistant dashboards are configured in YAML mode, the card configuration must be added directly to the view definition.
-
-Example dashboard configuration:
-
-```yaml
-views:
-  - title: Home
-    cards:
-      - type: custom:gseptik-cistern-card
-        entities:
-          level: uroven_zhidkosti_septika
-          temp: temperatura_septika
-          pressure: davlenie_septika
-          x_level: kriticheskii_uroven_septika
-          exceeds_x_level: prevyshen_kriticheskii_uroven_septika
-          error_name: oshibka_septika
-```
-
-After saving the configuration, the card appears on the dashboard automatically.

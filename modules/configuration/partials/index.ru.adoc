@@ -1,59 +1,89 @@
-= Использование
-:description: Использование GSeptik Card в Home Assistant — добавление карточек на дашборд через визуальный редактор или YAML-конфигурацию.
-:keywords: GSeptik, Home Assistant, использование, дашборд, Lovelace, кастомная карточка, YAML, визуальный редактор
-:navtitle: Использование
+= Конфигурация
+:description: Конфигурация GSeptik Card в Home Assistant — параметры сущностей, настройки отображения и пример полной YAML-конфигурации.
+:keywords: GSeptik, Home Assistant, конфигурация, сущности, параметры, Lovelace, YAML, кастомная карточка
+:navtitle: Конфигурация
 
-*GSeptik Card* используется для отображения данных системы мониторинга септика в интерфейсе *Home Assistant*.
+Раздел описывает доступные параметры конфигурации *GSeptik Card*.
 
-Карточки добавляются в дашборды Home Assistant стандартными способами: через визуальный редактор интерфейса или напрямую через YAML-конфигурацию Lovelace.
+Карточка настраивается через YAML-конфигурацию и использует набор сущностей Home Assistant для отображения параметров системы мониторинга септика. В будущих версиях список параметров может быть расширен.
 
-В составе проекта доступны следующие элементы интерфейса:
+== Сущности
 
-- *GSeptik Cistern Card* (`custom:gseptik-cistern-card`)
-- *GSeptik Tile Card* (`custom:gseptik-tile-card`)
-- *GSeptik Badge* (`custom:gseptik-badge`)
+Каждая сущность соответствует определённому параметру системы и может иметь собственную иконку.
 
-== Использование через интерфейс (визуальный редактор)
+[cols="1,2,1,3",options="header"]
+|===
+| Ключ | Пример entity | Иконка | Описание
 
-Добавление карточки через визуальный редактор подходит для большинства пользователей и не требует ручного редактирования YAML-файлов.
+| `level`
+| `sensor.uroven_zhidkosti_septika`
+| `mdi:water-percent`
+| Текущий уровень заполнения септика
 
-1. Откройте любой дашборд в Home Assistant.
-2. Нажмите *Редактировать дашборд*.
-3. Выберите *Добавить карточку*.
-4. Выберите тип *Ручная карточка*.
-5. Вставьте конфигурацию карточки и сохраните изменения.
+| `temp`
+| `sensor.temperatura_septika`
+| `mdi:thermometer`
+| Температура в системе септика
 
-Пример конфигурации:
+| `pressure`
+| `sensor.davlenie_septika`
+| `mdi:gauge`
+| Внутреннее давление
+
+| `x_level`
+| `sensor.kriticheskii_uroven_septika`
+| `mdi:water-alert`
+| Порог критического уровня
+
+| `exceeds_x_level`
+| `sensor.prevyshen_kriticheskii_uroven_septika`
+| `mdi:alert-octagon-outline`
+| Признак превышения критического уровня
+
+| `error_name`
+| `sensor.oshibka_septika`
+| `mdi:alert-circle-outline`
+| Состояние ошибки или описание ошибки
+|===
+
+== Параметры отображения
+
+Параметры отображения позволяют управлять внешним видом карточки.
+
+[cols="1,1,1,3",options="header"]
+|===
+| Параметр | Тип | По умолчанию | Описание
+
+| `show_title`
+| boolean
+| `true`
+| Показывать или скрывать заголовок карточки
+|===
+
+== Пример конфигурации
+
+Пример полной конфигурации карточки с указанием сущностей и пользовательских иконок:
 
 ```yaml
 type: custom:gseptik-cistern-card
+show_title: true
 entities:
-  level: uroven_zhidkosti_septika
-  temp: temperatura_septika
-  pressure: davlenie_septika
-  x_level: kriticheskii_uroven_septika
-  exceeds_x_level: prevyshen_kriticheskii_uroven_septika
-  error_name: oshibka_septika
+  level:
+    entity: sensor.uroven_zhidkosti_septika
+    icon: mdi:water-percent
+  temp:
+    entity: sensor.temperatura_septika
+    icon: mdi:thermometer
+  pressure:
+    entity: sensor.davlenie_septika
+    icon: mdi:gauge
+  x_level:
+    entity: sensor.kriticheskii_uroven_septika
+    icon: mdi:water-alert
+  exceeds_x_level:
+    entity: sensor.prevyshen_kriticheskii_uroven_septika
+    icon: mdi:alert-octagon-outline
+  error_name:
+    entity: sensor.oshibka_septika
+    icon: mdi:alert-circle-outline
 ```
-
-== Использование через YAML (ручная конфигурация)
-
-Если дашборды Home Assistant настроены в режиме YAML, конфигурацию карточки необходимо добавить непосредственно в описание представления.
-
-Пример конфигурации дашборда:
-
-```yaml
-views:
-  - title: Home
-    cards:
-      - type: custom:gseptik-cistern-card
-        entities:
-          level: uroven_zhidkosti_septika
-          temp: temperatura_septika
-          pressure: davlenie_septika
-          x_level: kriticheskii_uroven_septika
-          exceeds_x_level: prevyshen_kriticheskii_uroven_septika
-          error_name: oshibka_septika
-```
-
-После сохранения конфигурации карточка появляется на дашборде автоматически.
