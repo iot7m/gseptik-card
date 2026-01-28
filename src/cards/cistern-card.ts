@@ -31,7 +31,7 @@ export class CisternCard extends LitElement implements LovelaceCard {
       ...config,
       show_pressure: config.show_pressure ?? true,
       show_x_level: config.show_x_level ?? true,
-      show_header: config.show_header ?? false,
+      header: { show: config.header.show ?? false, text: config.header.text ?? "Септик" },
     };
     assertAllEntities(extendedConfig);
     this._config = extendedConfig;
@@ -57,7 +57,7 @@ export class CisternCard extends LitElement implements LovelaceCard {
       entities: Object.fromEntries(GSEPTIK_ENTITY_DEFS.map((d) => [d.key, getEntityId(String(d.key))])),
       show_pressure: true,
       show_x_level: true,
-      show_header: false,
+      header: { show: false, text: "Септик" },
     };
   }
 
@@ -81,7 +81,7 @@ export class CisternCard extends LitElement implements LovelaceCard {
 
     return html`
       <ha-card>
-        ${this._config.show_header ? html`<h1 class="card-header">Септик</h1>` : null}
+        ${this._config.header.show ? html`<h1 class="card-header">${this._config.header.text}</h1>` : null}
         <div class="card-box">${this.renderCistern()} ${this.renderEntities()}</div>
       </ha-card>
     `;

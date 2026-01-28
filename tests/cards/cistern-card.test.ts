@@ -13,9 +13,9 @@ describe("cistern-card", () => {
     el.setConfig({
       type: `custom:${CISTERN_CARD_NAME}`,
       entities: ENTITIES,
-      show_header: true,
-      show_pressure: true,
       show_x_level: true,
+      show_pressure: true,
+      header: { show: true, text: "Септик" },
     });
     el.hass = createHass();
 
