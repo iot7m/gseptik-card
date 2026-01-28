@@ -28,10 +28,10 @@ export class CisternCard extends LitElement implements LovelaceCard {
 
   setConfig(config: GSeptikCardConfig) {
     const extendedConfig = {
-      ...config,
       pressure: { show: true, label: "Давление", icon: "mdi:gauge" },
       x_level: { show: true, label: "Критический уровень", icon: "mdi:water-alert" },
       header: { show: config.header?.show ?? false, label: config.header?.label ?? "Септик" },
+      ...config,
     };
     assertAllEntities(extendedConfig);
     this._config = extendedConfig;
@@ -158,45 +158,8 @@ export class CisternCard extends LitElement implements LovelaceCard {
           const uom = getUnitOfMeasure(stateObj);
           const name = getFriendlyName(stateObj, def.label);
 
-          let icon = def.icon;
-          let label = name;
-          if (def.key === "pressure" && this._config?.pressure?.icon) {
-            icon = this._config.pressure.icon;
-          }
-          if (def.key === "x_level" && this._config?.x_level?.icon) {
-            icon = this._config.x_level.icon;
-          }
-          if (def.key === "level" && this._config?.level?.icon) {
-            icon = this._config.level.icon;
-          }
-          if (def.key === "exceeds_x_level" && this._config?.exceeds_x_level?.icon) {
-            icon = this._config.exceeds_x_level.icon;
-          }
-          if (def.key === "temp" && this._config?.temp?.icon) {
-            icon = this._config.temp.icon;
-          }
-          if (def.key === "error_name" && this._config?.error_name?.icon) {
-            icon = this._config.error_name.icon;
-          }
-
-          if (def.key === "pressure" && this._config?.pressure?.label) {
-            label = this._config.pressure.label;
-          }
-          if (def.key === "x_level" && this._config?.x_level?.label) {
-            label = this._config.x_level.label;
-          }
-          if (def.key === "level" && this._config?.level?.label) {
-            label = this._config.level.label;
-          }
-          if (def.key === "exceeds_x_level" && this._config?.exceeds_x_level?.label) {
-            label = this._config.exceeds_x_level.label;
-          }
-          if (def.key === "temp" && this._config?.temp?.label) {
-            label = this._config.temp.label;
-          }
-          if (def.key === "error_name" && this._config?.error_name?.label) {
-            label = this._config.error_name.label;
-          }
+          const icon = config[def.key]?.icon ?? def.icon;
+          const label = config[def.key]?.label ?? name;
           return html`
             <div class="entity-row" @click=${() => this._openMoreInfo(entityId)}>
               <ha-icon class="entity-icon" icon=${icon}></ha-icon>
