@@ -10,7 +10,13 @@ import { type CardTestElement } from "@tests/types";
 describe("cistern-card", () => {
   it("renders without crashing when hass and config are provided", async () => {
     const el = document.createElement(CISTERN_CARD_NAME) as CardTestElement;
-    el.setConfig({ type: `custom:${CISTERN_CARD_NAME}`, entities: ENTITIES });
+    el.setConfig({
+      type: `custom:${CISTERN_CARD_NAME}`,
+      entities: ENTITIES,
+      show_header: true,
+      show_pressure: true,
+      show_x_level: true,
+    });
     el.hass = createHass();
 
     document.body.appendChild(el);
