@@ -13,7 +13,7 @@ describe("cistern-card", () => {
     el.setConfig({
       type: `custom:${CISTERN_CARD_NAME}`,
       entities: ENTITIES,
-      header: { show: true, label: "Септик" },
+      header: { show: true, label: "Septic" },
     });
     el.hass = createHass();
 
@@ -21,6 +21,6 @@ describe("cistern-card", () => {
     await el.updateComplete;
 
     expect(el.shadowRoot).toBeTruthy();
-    expect(el.shadowRoot!.textContent).toContain("Септик");
+    expect(el.shadowRoot!.textContent).toContain("Septic");
   });
 });

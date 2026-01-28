@@ -4,11 +4,12 @@ import type { GSeptikEntityKey } from "@/types/defs";
 
 export type GSeptikEntitiesConfig = Record<GSeptikEntityKey, string>;
 
-interface GsepticHeader {
+interface GSeptikHeaderConfig {
   label: string;
   show: boolean;
 }
-interface GsepticEntityItem {
+
+interface GSeptikItemConfig {
   label: string;
   icon: string;
   show: boolean;
@@ -16,13 +17,13 @@ interface GsepticEntityItem {
 
 export interface GSeptikCardConfig extends LovelaceCardConfig {
   entities: GSeptikEntitiesConfig;
-  header?: GsepticHeader;
-  pressure?: GsepticEntityItem;
-  x_level?: GsepticEntityItem;
-  level?: GsepticEntityItem;
-  temp?: GsepticEntityItem;
-  exceeds_x_level?: GsepticEntityItem;
-  error_name?: GsepticEntityItem;
+  header?: GSeptikHeaderConfig;
+  pressure?: GSeptikItemConfig;
+  x_level?: GSeptikItemConfig;
+  level?: GSeptikItemConfig;
+  temp?: GSeptikItemConfig;
+  exceeds_x_level?: GSeptikItemConfig;
+  error_name?: GSeptikItemConfig;
 }
 
 export interface GSpepticCardEditorConfig extends LovelaceCardConfig {
